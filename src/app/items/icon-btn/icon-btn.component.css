@@ -1,0 +1,13 @@
+.icon-btn {
+  width: 24px;
+  height: 24px;
+  background-color: #2C2C2C;
+  color: #F5F5F5;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  justify-content: space-evenly;
+  border-radius: 8px;
+}
+
+/*# sourceMappingURL=icon-btn.component.css.map */

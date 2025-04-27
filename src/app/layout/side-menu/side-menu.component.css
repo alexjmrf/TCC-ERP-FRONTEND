@@ -1,0 +1,39 @@
+.sideMenu {
+  width: 240px;
+  height: 100vh;
+  background-color: #01001F;
+  padding: 1rem;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+.sideMenu ul {
+  list-style: none;
+  padding: 0;
+}
+.sideMenu ul li {
+  margin-bottom: 1rem;
+}
+.sideMenu ul li a {
+  color: white;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: background 0.3s;
+  background-color: #434343;
+}
+.sideMenu ul li a:hover {
+  background-color: #333;
+}
+.sideMenu ul li a.active {
+  background-color: #232323;
+  color: white;
+}
+.sideMenu ul li a .icon {
+  margin-right: 0.75rem;
+}
+.sideMenu ul li a .icon::selection {
+  background: transparent;
+}
+
+/*# sourceMappingURL=side-menu.component.css.map */

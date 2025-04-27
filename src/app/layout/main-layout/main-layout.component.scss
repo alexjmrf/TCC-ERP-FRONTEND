@@ -1,0 +1,27 @@
+.layout {
+  display: flex;
+  height: 100%;
+}
+
+app-sideMenu {
+  width: 250px;
+  flex-shrink: 0;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow: hidden;
+  margin-left: 22px;
+}
+
+app-top-bar {
+  height: 90px;
+  flex-shrink: 0;
+}
+
+.router-content {
+  flex-grow: 1;
+  overflow-y: auto;
+}

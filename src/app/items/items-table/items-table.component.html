@@ -1,0 +1,24 @@
+<table>
+  <thead>
+    <tr>
+      <th>Produto</th>
+      <th>Código</th>
+      <th>Categoria</th>
+      <th>Preço de Venda</th>
+      <th>Lucro por Venda</th>
+      <th>Quantidade</th>
+      <th>Foto</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of data">
+      <td>{{ row.product }}</td>
+      <td>{{ row.code }}</td>
+      <td>{{ row.category }}</td>
+      <td>R${{ row.price }}</td>
+      <td>R${{ row.profit }}</td>
+      <td>{{ row.quantity }}</td>
+      <td>{{ row.photo }}</td>
+    </tr>
+  </tbody>
+</table>

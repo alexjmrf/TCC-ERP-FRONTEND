@@ -1,0 +1,31 @@
+<div class="login-container">
+  <div class="login-card">
+    <h1>Login</h1>
+    <form (ngSubmit)="onLogin(loginForm)" #loginForm="ngForm" style="width: 75%;">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          required
+          ngModel
+          placeholder="Digite seu email">
+      </div>
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          required
+          ngModel
+          placeholder="Digite sua senha">
+      </div>
+      <div style="width: 100%; display: flex; gap: 8px; justify-content: space-between;">
+        <button type="submit" [disabled]="!loginForm.valid" style="max-width: 200px; border-radius: 8px;">Entrar</button>
+        <button style="max-width: 200px; border-radius: 8px;" routerLink="/signin">Cadastrar</button>
+      </div>
+    </form>
+  </div>
+</div>

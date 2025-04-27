@@ -1,0 +1,60 @@
+import { Component } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
+import { RouterLink, Router } from '@angular/router';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatButtonModule } from '@angular/material/button';
+
+@Component({
+  selector: 'app-login',
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterLink,
+    HttpClientModule,
+    MatButtonModule,
+  ],
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css'],
+})
+export class LoginComponent {
+  private readonly API_URL = 'http://localhost:8080/api/v1/users/login';
+
+  constructor(
+    private router: Router,
+    private http: HttpClient,
+    private snackBar: MatSnackBar
+  ) {}
+
+  onLogin(loginForm: NgForm) {
+    if (loginForm.valid) {
+      const loginData = {
+        email: loginForm.value.email,
+        password: loginForm.value.password,
+      };
+
+      this.http.post(this.API_URL, loginData).subscribe({
+        next: (response: any) => {
+          debugger
+          this.snackBar.open(`Bem-vindo, ${response.name}!`, 'Fechar', {
+            duration: 3000, // 3 segundos
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            panelClass: ['success-snackbar']
+          });
+
+          this.router.navigate(['/products']);
+        },
+        error: (error) => {
+          console.log(error);
+          this.snackBar.open('Login falhou. Verifique suas credenciais.', 'Fechar', {
+            duration: 3000,
+            panelClass: ['error-snackbar']
+          });
+        },
+      });
+    }
+  }
+}

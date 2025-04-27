@@ -1,0 +1,44 @@
+.sideMenu {
+  width: 240px;
+  height: 100vh;
+  background-color: #01001F;
+  padding: 1rem;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+
+  ul {
+    list-style: none;
+    padding: 0;
+
+    li {
+      margin-bottom: 1rem;
+
+      a {
+        color: white;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        padding: 0.5rem;
+        border-radius: 8px;
+        transition: background 0.3s;
+        background-color: #434343;
+
+        &:hover {
+          background-color: #333;
+        }
+
+        &.active {
+          background-color: #232323;
+          color: white;
+        }
+
+        .icon {
+          margin-right: 0.75rem;
+        }
+
+        .icon::selection {
+          background: transparent;
+        }
+      }
+    }
+  }
+}
