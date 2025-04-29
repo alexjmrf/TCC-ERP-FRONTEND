@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { RouterLink, Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -25,7 +26,8 @@ export class LoginComponent {
   constructor(
     private router: Router,
     private http: HttpClient,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private UserService: UserService
   ) {}
 
   onLogin(loginForm: NgForm) {
@@ -35,23 +37,22 @@ export class LoginComponent {
         password: loginForm.value.password,
       };
 
-      this.http.post(this.API_URL, loginData).subscribe({
+      this.UserService.loginUser(loginData).subscribe({
         next: (response: any) => {
-          debugger
-          this.snackBar.open(`Bem-vindo, ${response.name}!`, 'Fechar', {
-            duration: 3000, // 3 segundos
-            horizontalPosition: 'right',
+          this.snackBar.open('Login realizado com sucesso!', 'Fechar', {
+            duration: 3000,
             verticalPosition: 'top',
-            panelClass: ['success-snackbar']
+            horizontalPosition: 'center',
+            panelClass: ['snackbar-success'],
           });
-
-          this.router.navigate(['/products']);
+          this.router.navigate(['/home']);
         },
         error: (error) => {
-          console.log(error);
-          this.snackBar.open('Login falhou. Verifique suas credenciais.', 'Fechar', {
+          this.snackBar.open('Erro ao realizar login. Tente novamente.', 'Fechar', {
             duration: 3000,
-            panelClass: ['error-snackbar']
+            verticalPosition: 'top',
+            horizontalPosition: 'center',
+            panelClass: ['snackbar-error'],
           });
         },
       });
