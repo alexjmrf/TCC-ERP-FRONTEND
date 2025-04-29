@@ -1,7 +1,7 @@
 {
   "navigationFallback": {
     "rewrite": "/index.html",
-    "exclude": ["*.{css,scss,js,png,gif,ico,jpg,svg,woff,woff2}"]
+    "exclude": ["/images/*.{png,jpg,gif}", "/css/*", "/assets/*", "/*.{js,css,map,ico,jpg,png,json}"]
   },
   "routes": [
     {
@@ -13,5 +13,8 @@
   "globalHeaders": {
     "content-security-policy": "default-src 'self' https://tccerp-crf6gadfhra5d9cz.brazilsouth-01.azurewebsites.net/; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;",
     "cache-control": "no-cache"
+  },
+  "platform": {
+    "apiRuntime": "node:16"
   }
 }
