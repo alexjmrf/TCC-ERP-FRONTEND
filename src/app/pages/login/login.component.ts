@@ -5,6 +5,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
+import {AuthService} from '../../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -25,6 +26,7 @@ export class LoginComponent {
   constructor(
     private router: Router,
     private http: HttpClient,
+    private authService: AuthService,
     private snackBar: MatSnackBar
   ) {}
 
@@ -32,29 +34,32 @@ export class LoginComponent {
     if (loginForm.valid) {
       const loginData = {
         email: loginForm.value.email,
-        password: loginForm.value.password,
+        password: loginForm.value.password
       };
 
-      this.http.post(this.API_URL, loginData).subscribe({
-        next: (response: any) => {
-          debugger
-          this.snackBar.open(`Bem-vindo, ${response.name}!`, 'Fechar', {
-            duration: 3000, // 3 segundos
-            horizontalPosition: 'right',
-            verticalPosition: 'top',
-            panelClass: ['success-snackbar']
-          });
+      this.http.post(this.API_URL, loginData)
+        .subscribe({
+          next: (response: any) => {
+            this.authService.setToken(response.jwt);
+            this.authService.setOwnerId(response.id);
+            this.snackBar.open(`Bem-vindo, ${response.name}!`, 'Fechar', {
+              duration: 3000,
+              horizontalPosition: 'right',
+              verticalPosition: 'top',
+              panelClass: ['success-snackbar']
+            });
 
-          this.router.navigate(['/products']);
-        },
-        error: (error) => {
-          console.log(error);
-          this.snackBar.open('Login falhou. Verifique suas credenciais.', 'Fechar', {
-            duration: 3000,
-            panelClass: ['error-snackbar']
-          });
-        },
-      });
+            this.router.navigate(['/products']);
+          },
+          error: (error) => {
+            console.log(error);
+            this.snackBar.open('Login falhou. Verifique suas credenciais.', 'Fechar', {
+              duration: 3000,
+              panelClass: ['error-snackbar']
+            });
+          }
+        });
     }
   }
+
 }

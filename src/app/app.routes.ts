@@ -11,8 +11,10 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { SigninComponent } from './pages/signin/signin.component';
+import { AuthGuard } from './auth.guard'; // Importando o AuthGuard
 
 export const routes: Routes = [
+
   // Home e login fora do MainLayout
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
@@ -23,17 +25,19 @@ export const routes: Routes = [
     path: '',
     component: MainLayoutComponent,
     children: [
-      { path: 'dashboard', component: DashboardComponent },
-      { path: 'sales', component: SalesComponent },
-      { path: 'products', component: ProductsComponent },
-      { path: 'clients', component: ClientsComponent },
-      { path: 'employees', component: EmployeesComponent },
-      { path: 'finances', component: FinancesComponent },
-      { path: 'settings', component: SettingsComponent },
-      { path: 'help', component: HelpComponent }
+      { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+      { path: 'sales', component: SalesComponent, canActivate: [AuthGuard] },
+      { path: 'products', component: ProductsComponent, canActivate: [AuthGuard] },
+      { path: 'clients', component: ClientsComponent, canActivate: [AuthGuard] },
+      { path: 'employees', component: EmployeesComponent, canActivate: [AuthGuard] },
+      { path: 'finances', component: FinancesComponent, canActivate: [AuthGuard] },
+      { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
+      { path: 'help', component: HelpComponent, canActivate: [AuthGuard] }
     ]
   },
 
   // Wildcard para páginas não encontradas
   { path: '**', redirectTo: '' }
 ];
+
+

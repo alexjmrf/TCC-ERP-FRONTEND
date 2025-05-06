@@ -4,7 +4,7 @@
     <div style="display: flex; gap: 8px; align-items: center;">
       <img [ngSrc]="'assets/notification.svg'" width="24" height="24" alt="Ícone" style="cursor:pointer;"/>
       <div class="user-icon">
-        <img [ngSrc]="'assets/employees.svg'" width="24" height="24" alt="Ícone" />
+        <img [ngSrc]="'assets/employees.svg'" width="24" height="24" alt="Ícone" (click)="logout()"/>
       </div>
       <img [ngSrc]="'assets/dropdown-icon.svg'" width="12" height="12" alt="Ícone" />
     </div>
