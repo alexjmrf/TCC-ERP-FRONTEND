@@ -1,0 +1,32 @@
+<table>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Cargo</th>
+      <th>Email</th>
+      <th>Telefone</th>
+      <th>Endereço</th>      <th>Salário</th>       <th>Data Contratação</th> <th>Status</th>        <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let employee of data">
+      <td>{{ employee.name }}</td>
+      <td>{{ employee.role }}</td>
+      <td>{{ employee.email }}</td>
+      <td>{{ employee.phone || '-' }}</td>
+      <td>{{ employee.address || '-' }}</td>   <td>{{ employee.salary | currency:'BRL':'symbol':'1.2-2' }}</td> <td>{{ employee.hiredate | date:'dd/MM/yyyy' }}</td> <td>{{ employee.status || '-' }}</td>    <td>
+        <button (click)="editEmployee(employee)" title="Editar Funcionário" class="action-btn edit-btn">
+          <img src="assets/edit-icon.svg" alt="Editar" width="16" height="16">
+        </button>
+        <button (click)="deleteEmployee(employee.id)" title="Excluir Funcionário" class="action-btn delete-btn">
+          <img src="assets/remove-icon.svg" alt="Excluir" width="16" height="16">
+        </button>
+      </td>
+    </tr>
+    <tr *ngIf="!data || data.length === 0">
+      <td [attr.colspan]="displayedColumns.length" style="text-align: center; padding: 20px;">
+        Nenhum funcionário encontrado.
+      </td>
+    </tr>
+  </tbody>
+</table>

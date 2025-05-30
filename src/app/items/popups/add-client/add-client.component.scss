@@ -1,0 +1,91 @@
+.modal-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1050; // Para garantir que fique sobre outros elementos
+}
+
+.modal {
+  background: white;
+  padding: 1.5rem 2rem; // Aumentado o padding para melhor espaçamento
+  border-radius: 8px;
+  width: 400px; // Aumentado a largura para acomodar melhor os campos
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; // Espaçamento entre os elementos do modal
+
+  h2 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: #333;
+    text-align: center;
+  }
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  width: 100%; // Para os campos ocuparem a largura total do modal
+
+  label {
+    margin-bottom: 0.5rem;
+    color: #555;
+    font-size: 0.9rem;
+  }
+
+  input {
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    width: 100%; // Para garantir que o input ocupe o espaço
+    box-sizing: border-box; // Para incluir padding e borda na largura total
+
+    &:focus {
+      border-color: #007bff;
+      outline: none;
+      box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+    }
+  }
+
+  // Estilo para feedback de validação (opcional, mas útil)
+  input.ng-invalid.ng-touched {
+    border-color: #dc3545;
+  }
+}
+
+.btn-popup {
+  color: white;
+  width: 100%;
+  border: none;
+  height: 40px; // Aumentada a altura para melhor clique
+  border-radius: 8px;
+  min-width: 120px; // Aumentada a largura mínima
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+}
+
+// Específico para botões de adicionar e cancelar para melhor distinção
+button[type="submit"].btn-popup {
+  background-color: #28a745; // Verde para adicionar/confirmar
+  &:hover:not(:disabled) {
+    background-color: #218838;
+  }
+}
+
+button[type="button"].btn-popup {
+  background-color: #dc3545; // Vermelho para cancelar/fechar
+  &:hover:not(:disabled) {
+    background-color: #c82333;
+  }
+}

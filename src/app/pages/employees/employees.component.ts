@@ -1,11 +1,98 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { AuthService } from '../../auth.service';
+import { SearchBarComponent } from "../../items/search-bar/search-bar.component";
+import { IconBtnComponent } from '../../items/icon-btn/icon-btn.component';
+import { EmployeesTableComponent } from '../../items/employees-table/employees-table.component';
+import { AddEmployeeComponent } from '../../items/popups/add-employee/add-employee.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-employees',
-  imports: [],
+  standalone: true,
+  imports: [
+    CommonModule,
+    SearchBarComponent,
+    IconBtnComponent,
+    EmployeesTableComponent, 
+    AddEmployeeComponent  
+  ],
   templateUrl: './employees.component.html',
-  styleUrl: './employees.component.scss'
+  styleUrls: ['./employees.component.scss']
 })
-export class EmployeesComponent {
+export class EmployeesComponent implements OnInit {
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+    private snackBar: MatSnackBar
+  ) {}
 
+  employees: any[] = [];
+  // TODO: Ajustar as URLs para funcionar independente do ambiente
+  private readonly urlAPIEmployees = 'http://localhost:5003/api/employees/';
+
+  @ViewChild('employeeModal') employeeModal!: AddEmployeeComponent;
+
+  ngOnInit(): void {
+    this.loadEmployees();
+  }
+
+  loadEmployees(): void {
+    this.http.get<any[]>(`${this.urlAPIEmployees}`, { withCredentials: true }).subscribe({
+      next: (data) => {
+        this.employees = data;
+        console.log('Funcionários carregados:', data);
+      },
+      error: (err) => {
+        console.error('Erro ao carregar funcionários:', err);
+        this.snackBar.open('Erro ao carregar funcionários', 'Fechar', {
+          duration: 3000,
+          panelClass: ['error-snackbar']
+        });
+      }
+    });
+  }
+
+  openAddEmployeePopup(): void {
+    this.employeeModal.open();
+  }
+
+  handleEmployeeAdded(event: { employee: any; file: File | null }): void {
+    const { employee } = event;
+    const ownerId = this.authService.getOwnerId();
+
+    if (!ownerId) {
+      this.snackBar.open('ID do usuário não encontrado. Não é possível adicionar funcionário.', 'Fechar', {
+        duration: 3000,
+        panelClass: ['error-snackbar']
+      });
+      return;
+    }
+
+    const employeePayload = {
+      ...employee,
+    };
+
+    this.http.post(this.urlAPIEmployees, employeePayload).subscribe({
+      next: (response: any) => {
+        console.log('Funcionário adicionado com sucesso:', response);
+        this.employees.push(response);
+        this.snackBar.open(`Funcionário ${response.name} adicionado!`, 'Fechar', {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: ['success-snackbar']
+        });
+        this.loadEmployees();
+      },
+      error: (error) => {
+        console.error('Erro ao adicionar funcionário:', error);
+        this.snackBar.open('Erro ao adicionar funcionário. Verifique os dados e tente novamente.', 'Fechar', {
+          duration: 3000,
+          panelClass: ['error-snackbar']
+        });
+      }
+    });
+  }
 }

@@ -1,0 +1,29 @@
+<table>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Email</th>
+      <th>Telefone</th>
+      <th>Endereço</th>
+      <th>Ações</th> </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let client of data">
+      <td>{{ client.name }}</td>
+      <td>{{ client.email }}</td>
+      <td>{{ client.phone || '-' }}</td> <td>{{ client.address || '-' }}</td> <td>
+        <button (click)="editClient(client)" title="Editar Cliente" class="action-btn edit-btn">
+          <img src="assets/edit-icon.svg" alt="Editar" width="16" height="16">
+        </button>
+        <button (click)="deleteClient(client.id)" title="Excluir Cliente" class="action-btn delete-btn">
+          <img src="assets/remove-icon.svg" alt="Excluir" width="16" height="16">
+        </button>
+      </td>
+    </tr>
+    <tr *ngIf="!data || data.length === 0">
+      <td colspan="5" style="text-align: center; padding: 20px;">
+        Nenhum cliente encontrado.
+      </td>
+    </tr>
+  </tbody>
+</table>
