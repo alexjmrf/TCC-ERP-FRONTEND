@@ -58,7 +58,7 @@ export class EmployeesComponent implements OnInit {
     this.employeeModal.open();
   }
 
-  handleEmployeeAdded(event: { employee: any; file: File | null }): void {
+  handleEmployeeAdded(event: { employee: any}): void {
     const { employee } = event;
     const ownerId = this.authService.getOwnerId();
 
