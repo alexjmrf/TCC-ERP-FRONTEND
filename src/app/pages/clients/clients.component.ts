@@ -7,6 +7,7 @@ import { IconBtnComponent } from '../../items/icon-btn/icon-btn.component'; //
 import { ClientsTableComponent } from '../../items/clients-table/clients-table.component'; //  Componente específico para clientes
 import { AddClientComponent } from '../../items/popups/add-client/add-client.component'; // Popup para adicionar cliente
 import { CommonModule } from '@angular/common';
+import { EditClientComponent } from '../../items/popups/edit-client/edit-client.component';
 
 @Component({
   selector: 'app-clients',
@@ -16,6 +17,7 @@ import { CommonModule } from '@angular/common';
     IconBtnComponent,
     ClientsTableComponent,
     AddClientComponent,
+    EditClientComponent,
     CommonModule
   ],
   templateUrl: './clients.component.html',
@@ -33,6 +35,7 @@ export class ClientsComponent implements OnInit {
   private readonly urlAPICustomers = 'http://localhost:5002/api/customers/';
 
   @ViewChild('clientModal') clientModal!: AddClientComponent;
+  @ViewChild('editClientModal') editClientModal!: EditClientComponent;
 
   ngOnInit(): void {
     this.loadClients();
@@ -56,6 +59,10 @@ export class ClientsComponent implements OnInit {
 
   openAddClientPopup(): void {
     this.clientModal.open();
+  }
+
+  handleOpenEditClient(client: any): void {
+    this.editClientModal.open(client);
   }
 
   handleClientAdded(event: { client: any; file: File | null }): void {
@@ -91,6 +98,53 @@ export class ClientsComponent implements OnInit {
         const errorMessage = error.error?.detail || error.error?.msg || (typeof error.error === 'string' && error.error.includes("DOCTYPE html") ? 'Erro no servidor (verifique o console do backend)' : 'Erro ao adicionar cliente.');
         this.snackBar.open(errorMessage, 'Fechar', {
           duration: 5000,
+          panelClass: ['error-snackbar']
+        });
+      }
+    });
+  }
+
+  handleDeleteClient(clientId: string): void {
+    // Confirmação com o usuário antes de excluir
+    if (confirm('Tem certeza de que deseja excluir este cliente?')) {
+      this.http.delete(`${this.urlAPICustomers}${clientId}`, { withCredentials: true }).subscribe({
+        next: () => {
+          this.snackBar.open('Cliente excluído com sucesso!', 'Fechar', {
+            duration: 3000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            panelClass: ['success-snackbar']
+          });
+          // Recarrega a lista de clientes para refletir a exclusão
+          this.loadClients();
+        },
+        error: (error) => {
+          console.error('Erro ao excluir cliente:', error);
+          this.snackBar.open('Erro ao excluir cliente.', 'Fechar', {
+            duration: 3000,
+            panelClass: ['error-snackbar']
+          });
+        }
+      });
+    }
+  }
+
+  handleClientUpdated(clientData: any): void {
+    const { id, ...updatePayload } = clientData; // Separa o ID do restante dos dados
+    this.http.put(`${this.urlAPICustomers}${id}`, updatePayload, { withCredentials: true }).subscribe({
+      next: () => {
+        this.snackBar.open('Cliente atualizado com sucesso!', 'Fechar', {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: ['success-snackbar']
+        });
+        this.loadClients(); // Recarrega a lista para mostrar os dados atualizados
+      },
+      error: (error) => {
+        console.error('Erro ao atualizar cliente:', error);
+        this.snackBar.open('Erro ao atualizar cliente.', 'Fechar', {
+          duration: 3000,
           panelClass: ['error-snackbar']
         });
       }

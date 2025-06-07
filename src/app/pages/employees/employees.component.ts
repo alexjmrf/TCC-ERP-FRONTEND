@@ -7,6 +7,7 @@ import { IconBtnComponent } from '../../items/icon-btn/icon-btn.component';
 import { EmployeesTableComponent } from '../../items/employees-table/employees-table.component';
 import { AddEmployeeComponent } from '../../items/popups/add-employee/add-employee.component';
 import { CommonModule } from '@angular/common';
+import { EditEmployeeComponent } from '../../items/popups/edit-employee/edit-employee.component';
 
 @Component({
   selector: 'app-employees',
@@ -16,7 +17,8 @@ import { CommonModule } from '@angular/common';
     SearchBarComponent,
     IconBtnComponent,
     EmployeesTableComponent, 
-    AddEmployeeComponent  
+    AddEmployeeComponent,
+    EditEmployeeComponent
   ],
   templateUrl: './employees.component.html',
   styleUrls: ['./employees.component.scss']
@@ -33,6 +35,7 @@ export class EmployeesComponent implements OnInit {
   private readonly urlAPIEmployees = 'http://localhost:5003/api/employees/';
 
   @ViewChild('employeeModal') employeeModal!: AddEmployeeComponent;
+  @ViewChild('editEmployeeModal') editEmployeeModal!: EditEmployeeComponent;
 
   ngOnInit(): void {
     this.loadEmployees();
@@ -58,7 +61,11 @@ export class EmployeesComponent implements OnInit {
     this.employeeModal.open();
   }
 
-  handleEmployeeAdded(event: { employee: any}): void {
+  handleOpenEditEmployee(employee: any): void {
+    this.editEmployeeModal.open(employee);
+  }
+
+  handleEmployeeAdded(event: {employee: any}): void {
     const { employee } = event;
     const ownerId = this.authService.getOwnerId();
 
@@ -89,6 +96,52 @@ export class EmployeesComponent implements OnInit {
       error: (error) => {
         console.error('Erro ao adicionar funcionário:', error);
         this.snackBar.open('Erro ao adicionar funcionário. Verifique os dados e tente novamente.', 'Fechar', {
+          duration: 3000,
+          panelClass: ['error-snackbar']
+        });
+      }
+    });
+  }
+
+  handleDeleteEmployee(employeeId: string): void {
+    // Confirmação com o usuário antes de excluir
+    if (confirm('Tem certeza de que deseja excluir este funcionario?')) {
+      this.http.delete(`${this.urlAPIEmployees}${employeeId}`, { withCredentials: true }).subscribe({
+        next: () => {
+          this.snackBar.open('Funcionario excluído com sucesso!', 'Fechar', {
+            duration: 3000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            panelClass: ['success-snackbar']
+          });
+          this.loadEmployees();
+        },
+        error: (error) => {
+          console.error('Erro ao excluir funcionario:', error);
+          this.snackBar.open('Erro ao excluir funcionario.', 'Fechar', {
+            duration: 3000,
+            panelClass: ['error-snackbar']
+          });
+        }
+      });
+    }
+  }
+
+  handleEmployeeUpdated(employeeData: any): void {
+    const { id, ...updatePayload } = employeeData; // Separa o ID do restante dos dados
+    this.http.put(`${this.urlAPIEmployees}${id}`, updatePayload, { withCredentials: true }).subscribe({
+      next: () => {
+        this.snackBar.open('Funcionario atualizado com sucesso!', 'Fechar', {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: ['success-snackbar']
+        });
+        this.loadEmployees(); // Recarrega a lista para mostrar os dados atualizados
+      },
+      error: (error) => {
+        console.error('Erro ao atualizar funcionario:', error);
+        this.snackBar.open('Erro ao atualizar funcionario.', 'Fechar', {
           duration: 3000,
           panelClass: ['error-snackbar']
         });

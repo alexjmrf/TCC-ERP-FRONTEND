@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule, NgForOf, DatePipe } from '@angular/common'; // DatePipe para formatar hiredate
 
 @Component({
@@ -14,6 +14,8 @@ import { CommonModule, NgForOf, DatePipe } from '@angular/common'; // DatePipe p
 })
 export class EmployeesTableComponent {
   @Input() data: any[] = [];
+  @Output() onDeleteEmployee = new EventEmitter<string>();
+  @Output() onEditEmployee = new EventEmitter<any>();
 
   // Atualiza as colunas para refletir os novos campos da API e do formulário
   // Os nomes aqui devem corresponder às chaves dos objetos no array 'data'
@@ -33,12 +35,10 @@ export class EmployeesTableComponent {
   constructor() {}
 
   editEmployee(employee: any): void {
-    console.log('Editar funcionário:', employee);
-    // TODO: Implementar lógica de edição (provavelmente emitir um evento para o componente pai)
+    this.onEditEmployee.emit(employee);
   }
 
   deleteEmployee(employeeId: string): void {
-    console.log('Excluir funcionário com ID:', employeeId);
-    // TODO: Implementar lógica de exclusão (provavelmente emitir um evento para o componente pai)
+    this.onDeleteEmployee.emit(employeeId);
   }
 }

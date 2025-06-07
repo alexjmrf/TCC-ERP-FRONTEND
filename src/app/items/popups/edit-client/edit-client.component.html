@@ -1,0 +1,31 @@
+<div class="modal-overlay" [class.show]="isOpen">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Editar Cliente</h2>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="clientForm" (ngSubmit)="onSubmit()" style="display: flex; flex-direction: column; align-items: center; gap: 12px;">
+        <div class="form-group">
+          <label for="name">Nome:</label>
+          <input id="name" type="text" formControlName="name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input id="email" type="email" formControlName="email">
+        </div>
+        <div class="form-group">
+          <label for="phone">Telefone:</label>
+          <input id="phone" type="text" formControlName="phone">
+        </div>
+        <div class="form-group">
+          <label for="address">Endereço:</label>
+          <input id="address" type="text" formControlName="address">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-cancel" (click)="close()">Cancelar</button>
+          <button type="submit" class="btn-save" [disabled]="!clientForm.valid">Salvar Alterações</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

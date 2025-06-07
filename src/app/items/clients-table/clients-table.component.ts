@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule, NgForOf } from '@angular/common'; //
 
 @Component({
@@ -13,20 +13,20 @@ import { CommonModule, NgForOf } from '@angular/common'; //
 })
 export class ClientsTableComponent {
   @Input() data: any[] = [];
+  @Output() onDeleteClient = new EventEmitter<string>();
+  @Output() onEditClient = new EventEmitter<any>();
 
   // Define as colunas que você quer exibir na tabela de clientes
-  displayedColumns: string[] = ['name', 'email', 'phone', 'address', 'actions']; // Exemplo de colunas
+  displayedColumns: string[] = ['name', 'email', 'phone', 'address', 'actions'];
 
   constructor() {}
 
   // Métodos para ações na tabela (editar, excluir, etc.) podem ser adicionados aqui
   editClient(client: any): void {
-    console.log('Editar cliente:', client);
-    // Implementar lógica de edição
+    this.onEditClient.emit(client);
   }
 
   deleteClient(clientId: string): void {
-    console.log('Excluir cliente com ID:', clientId);
-    // Implementar lógica de exclusão
+    this.onDeleteClient.emit(clientId)
   }
 }

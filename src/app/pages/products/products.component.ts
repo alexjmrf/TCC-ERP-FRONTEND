@@ -27,8 +27,7 @@ export class ProductsComponent {
   ) {}
 
   products: any[] = [];
-  urlRegister: string = 'http://localhost:8080/api/v1/products/register';
-  urlGetAll: string = 'http://localhost:8080/api/v1/products/'; // ou sua rota correta
+  urlAPIProducts: string = 'http://localhost:5000/api/inventory/products/';
 
   @ViewChild('productModal') productModal!: AddProductComponent;
 
@@ -38,7 +37,7 @@ export class ProductsComponent {
 
   loadProducts(): void {
 
-    this.http.get<any[]>(this.urlGetAll + this.authService.getOwnerId()).subscribe({
+    this.http.get<any[]>(`${this.urlAPIProducts}`, { withCredentials: true }).subscribe({
       next: (data) => {
         this.products = data;
         console.log('Produtos carregados:', data);
@@ -70,7 +69,7 @@ export class ProductsComponent {
     }
 
     // Enviando o FormData via POST para o backend
-    this.http.post(this.urlRegister, formData).subscribe({
+    this.http.post(this.urlAPIProducts, formData).subscribe({
       next: (response) => {
         console.log('Produto enviado com sucesso:', response);
         this.products.push(product); // Adicionando o produto à lista
