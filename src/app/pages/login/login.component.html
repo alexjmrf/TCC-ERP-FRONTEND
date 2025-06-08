@@ -26,6 +26,10 @@
         <button type="submit" [disabled]="!loginForm.valid" style="max-width: 200px; border-radius: 8px;">Entrar</button>
         <button style="max-width: 200px; border-radius: 8px;" routerLink="/signin">Cadastrar</button>
       </div>
+      <a href="{{GOOGLE_SSO}}" style="display: flex; align-items: center; gap: 16px; max-width: 200px; background-color: #01001F; border:1px solid #0000004D; padding: 8px; border-radius: 8px; margin-top: 8px; color: whitesmoke; cursor:pointer;">
+        <img style="height: 30px; width: 30px; position: relative;" ngSrc="assets/google-icon.png" alt="google icon" fill>
+        Entrar com Google
+      </a>
     </form>
   </div>
 </div>

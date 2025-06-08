@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { RouterLink, Router } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
 import {AuthService} from '../../auth.service';
@@ -16,6 +16,7 @@ import {AuthService} from '../../auth.service';
     RouterLink,
     HttpClientModule,
     MatButtonModule,
+    NgOptimizedImage,
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
@@ -24,6 +25,7 @@ export class LoginComponent {
   private readonly API_URL = 'http://localhost:8080/api/v1/users/login';
   // private readonly API_URL = 'http://54.144.81.161:8080/api/v1/users/login';
   // private readonly API_URL = 'http://localhost:5001/api/auth/login';
+  protected readonly GOOGLE_SSO = "http://localhost:8080/oauth2/authorization/google"
 
   constructor(
     private router: Router,
