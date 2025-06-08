@@ -28,7 +28,9 @@ export class ProductsComponent {
 
   products: any[] = [];
   urlRegister: string = 'http://localhost:8080/api/v1/products/register';
-  urlGetAll: string = 'http://localhost:8080/api/v1/products/'; // ou sua rota correta
+  // urlRegister: string = 'http://54.144.81.161:8080/api/v1/products/register';
+  urlGetAll: string = 'http://localhost:8080/api/v1/products/';
+  // urlGetAll: string = 'http://54.144.81.161:8080/api/v1/products/';
 
   @ViewChild('productModal') productModal!: AddProductComponent;
 
@@ -62,11 +64,12 @@ export class ProductsComponent {
 
     const formData = new FormData();
 
-    formData.append('product', new Blob([JSON.stringify(product)], { type: 'application/json' }));
     product.ownerId = this.authService.getOwnerId();
+    formData.append('product', new Blob([JSON.stringify(product)], { type: 'application/json' }));
 
     if (file) {
-      formData.append('file', file);
+      console.log("Arquivo novo")
+      formData.append('image', file);
     }
 
     // Enviando o FormData via POST para o backend

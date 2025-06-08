@@ -22,6 +22,7 @@ import {AuthService} from '../../auth.service';
 })
 export class LoginComponent {
   private readonly API_URL = 'http://localhost:8080/api/v1/users/login';
+  // private readonly API_URL = 'http://54.144.81.161:8080/api/v1/users/login';
 
   constructor(
     private router: Router,
