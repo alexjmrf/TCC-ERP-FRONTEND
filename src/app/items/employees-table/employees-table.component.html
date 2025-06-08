@@ -5,7 +5,7 @@
       <th>Cargo</th>
       <th>Email</th>
       <th>Telefone</th>
-      <th>Endereço</th>      <th>Salário</th>       <th>Data Contratação</th> <th>Status</th>        <th>Ações</th>
+      <th>Endereço</th>      <th>Salário</th>       <th>Contratação</th> <th>Status</th>        <th>Ações</th>
     </tr>
   </thead>
   <tbody>
@@ -14,12 +14,16 @@
       <td>{{ employee.role }}</td>
       <td>{{ employee.email }}</td>
       <td>{{ employee.phone || '-' }}</td>
-      <td>{{ employee.address || '-' }}</td>   <td>{{ employee.salary | currency:'BRL':'symbol':'1.2-2' }}</td> <td>{{ employee.hiredate | date:'dd/MM/yyyy' }}</td> <td>{{ employee.status || '-' }}</td>    <td>
+      <td>{{ employee.address || '-' }}</td>   
+      <td>{{ employee.salary | currency:'BRL':'symbol':'1.2-2' }}</td> 
+      <td>{{ employee.hiredate | date:'dd/MM/yyyy' }}</td> 
+      <td>{{ employee.status || '-' }}</td>    
+      <td class="action-buttons">
         <button (click)="editEmployee(employee)" title="Editar Funcionário" class="action-btn edit-btn">
-          <img src="assets/edit-icon.svg" alt="Editar" width="16" height="16">
+          <mat-icon aria-hidden="false" aria-label="Editar" fontIcon="edit-btn"></mat-icon>
         </button>
         <button (click)="deleteEmployee(employee.id)" title="Excluir Funcionário" class="action-btn delete-btn">
-          <img src="assets/remove-icon.svg" alt="Excluir" width="16" height="16">
+          <mat-icon aria-hidden="false" aria-label="Excluir" fontIcon="remove-icon" width="16" height="16"></mat-icon>
         </button>
       </td>
     </tr>

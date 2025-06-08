@@ -1,12 +1,14 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { CommonModule, NgForOf } from '@angular/common'; //
+import { CommonModule, NgForOf } from '@angular/common';
+import {MatIconModule} from '@angular/material/icon';
 
 @Component({
   selector: 'app-clients-table',
   standalone: true,
   imports: [
     NgForOf,
-    CommonModule
+    CommonModule,
+    MatIconModule
   ],
   templateUrl: './clients-table.component.html',
   styleUrls: ['./clients-table.component.scss']

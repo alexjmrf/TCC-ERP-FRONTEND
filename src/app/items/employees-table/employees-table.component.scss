@@ -64,3 +64,15 @@ td[colspan] { // Aplicar a todas as células com colspan
   color: #777;
   font-style: italic;
 }
+
+.action-buttons {
+  display: flex;
+
+  .action-btn {
+    display: flex;
+
+    &:hover {
+      background-color: #dcdcdc;
+    }
+  }
+}

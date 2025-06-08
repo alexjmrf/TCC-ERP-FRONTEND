@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule, NgForOf, DatePipe } from '@angular/common'; // DatePipe para formatar hiredate
+import {MatIconModule} from '@angular/material/icon';
 
 @Component({
   selector: 'app-employees-table',
@@ -7,7 +8,8 @@ import { CommonModule, NgForOf, DatePipe } from '@angular/common'; // DatePipe p
   imports: [
     NgForOf,
     CommonModule,
-    DatePipe // Importar DatePipe
+    DatePipe, // Importar DatePipe
+    MatIconModule
   ],
   templateUrl: './employees-table.component.html',
   styleUrls: ['./employees-table.component.scss'] // Mantém o SCSS existente

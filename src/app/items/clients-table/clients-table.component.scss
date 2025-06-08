@@ -68,12 +68,16 @@ table {
     }
   }
 
-  .edit-btn:hover {
-    // background-color: #e0f2f1; // Um verde claro para editar
-  }
+  .action-buttons {
+    display: flex;
 
-  .delete-btn:hover {
-   // background-color: #ffebee; // Um vermelho claro para excluir
+    .action-btn {
+      display: flex;
+
+      &:hover {
+        background-color: #dcdcdc;
+      }
+    }
   }
 }
 

@@ -13,10 +13,10 @@
       <td>{{ client.email }}</td>
       <td>{{ client.phone || '-' }}</td> <td>{{ client.address || '-' }}</td> <td>
         <button (click)="editClient(client)" title="Editar Cliente" class="action-btn edit-btn">
-          <img src="assets/edit-icon.svg" alt="Editar" width="16" height="16">
+          <mat-icon aria-hidden="false" aria-label="Editar" fontIcon="edit-btn"></mat-icon>
         </button>
         <button (click)="deleteClient(client.id)" title="Excluir Cliente" class="action-btn delete-btn">
-          <img src="assets/remove-icon.svg" alt="Excluir" width="16" height="16">
+          <mat-icon aria-hidden="false" aria-label="Excluir" fontIcon="remove-icon" width="16" height="16"></mat-icon>
         </button>
       </td>
     </tr>
