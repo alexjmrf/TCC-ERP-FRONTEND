@@ -20,5 +20,10 @@
       <td>{{ row.quantity }}</td>
       <td><img style="width: 70px; height: 70px;" src="{{ row.photo }}" alt="product image"></td>
     </tr>
+    <tr *ngIf="!data || data.length === 0">
+      <td colspan="7" style="text-align: center; padding: 20px; font-style: italic;color: #212529;font-size: 0.95rem">
+        Nenhum produto encontrado.
+      </td>
+    </tr>
   </tbody>
 </table>
