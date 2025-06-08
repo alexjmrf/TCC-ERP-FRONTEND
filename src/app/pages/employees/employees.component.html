@@ -1,1 +1,29 @@
-<p>employees works!</p>
+<div style="width: 100%; height: 100%; background-color: #D9D9D9; display: flex; flex-direction: column; overflow: hidden;">
+
+  <div id="employees_header" style="padding: 10px; background-color: white; width: 100%; height: 108px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); border-bottom: 2px solid rgba(0, 0, 0, 0.2); display: flex; align-items: center; justify-content: space-evenly; z-index: 90;">
+    <h3 style="margin: 0;">Funcionários</h3>
+    <app-search-bar style="width: 50%"></app-search-bar>
+    <app-icon-btn iconName="add-icon.svg" buttonText="Adicionar Funcionário" width="200px" height="40px" (click)="openAddEmployeePopup()"></app-icon-btn>
+    <app-add-employee #employeeModal (employeeAdded)="handleEmployeeAdded($event)"></app-add-employee>
+    <app-edit-employee #editEmployeeModal (employeeUpdated)="handleEmployeeUpdated($event)"></app-edit-employee>
+    <app-icon-btn iconName="remove-icon.svg" buttonText="Remover Funcionário" width="200px" height="40px"></app-icon-btn>
+    <app-icon-btn iconName="down-arrow-icon.svg" buttonText="Outras ações" width="160px" height="40px"></app-icon-btn>
+  </div>
+
+  <div style="flex: 1; display: flex; min-width: 0;">
+    <div style="flex: 1; min-width: 0;">
+      <p style="margin: 16px 16px 16px 40px; font-weight: bold;">Lista de Funcionários</p>
+      <hr style="border: 1px solid rgba(0, 0, 0, 0.3); margin: 2px 16px;">
+      <div style="margin: 16px;">
+        <app-employees-table [data]="employees" (onDeleteEmployee)="handleDeleteEmployee($event)" (onEditEmployee)="handleOpenEditEmployee($event)"></app-employees-table>
+      </div>
+    </div>
+    <div style="width: 350px; background-color: white; border-left: 2px solid rgba(0, 0, 0, 0.3);">
+      <div style="width: 100%; display: flex; flex-direction: column; align-items: flex-start; padding: 4px 16px; border-bottom: 2px solid rgba(0, 0, 0, 0.3);">
+        <h3>Ações Rápidas de RH</h3>
+        <div style="display: flex; flex-direction: column; gap: 8px; padding-bottom: 4px;">
+          <app-icon-btn iconName="payroll-icon.svg" buttonText="Processar Folha" width="310px" height="40px"></app-icon-btn> <app-icon-btn iconName="permissions-icon.svg" buttonText="Gerenciar Cargos" width="310px" height="40px"></app-icon-btn> <app-icon-btn iconName="reports-icon.svg" buttonText="Relatórios de RH" width="310px" height="40px"></app-icon-btn> </div>
+      </div>
+    </div>
+  </div>
+</div>

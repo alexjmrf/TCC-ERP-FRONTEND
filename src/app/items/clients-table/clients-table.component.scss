@@ -1,0 +1,84 @@
+table {
+  width: 100%;
+  border-spacing: 0 8px; /* Espaçamento entre as linhas */
+
+  tbody tr {
+    height: 60px; /* Altura das linhas da tabela */
+    background-color: #F4F5FC; /* Cor de fundo das linhas */
+    border-radius: 4px; /* Bordas arredondadas para as linhas */
+    transition: background-color 0.2s ease-in-out;
+
+    &:hover {
+      background-color: #e9eaf7; /* Cor ao passar o mouse */
+    }
+  }
+
+  th, td {
+    padding: 12px 15px; /* Padding aumentado para melhor leitura */
+    text-align: left; /* Alinhamento à esquerda para melhor leitura de texto */
+    border-bottom: 1px solid #e0e0e0; /* Linha sutil entre as linhas */
+  }
+
+  th {
+    color: #5C6F88; /* Cor do texto do cabeçalho */
+    font-weight: 600; /* Peso da fonte do cabeçalho */
+    font-size: 0.9rem;
+    text-transform: uppercase; /* Transforma o texto em maiúsculas */
+  }
+
+  td {
+    color: #212529; /* Cor do texto das células */
+    font-size: 0.95rem;
+  }
+
+  /* Ajustes de largura para colunas específicas (exemplo) */
+  th:nth-child(1), td:nth-child(1) { // Nome
+    width: 25%;
+  }
+  th:nth-child(2), td:nth-child(2) { // Email
+    width: 25%;
+  }
+  th:nth-child(3), td:nth-child(3) { // Telefone
+    width: 20%;
+  }
+  th:nth-child(4), td:nth-child(4) { // Endereço
+    width: 20%;
+  }
+   th:nth-child(5), td:nth-child(5) { // Ações
+    width: 10%;
+    text-align: center; // Centraliza os botões de ação
+  }
+
+
+  .action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    margin-right: 5px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+
+    img {
+      vertical-align: middle;
+    }
+
+    &:hover {
+      background-color: rgba(0,0,0,0.05);
+    }
+  }
+
+  .edit-btn:hover {
+    // background-color: #e0f2f1; // Um verde claro para editar
+  }
+
+  .delete-btn:hover {
+   // background-color: #ffebee; // Um vermelho claro para excluir
+  }
+}
+
+// Mensagem para quando não há dados
+td[colspan="5"] { // Certifique-se que o colspan corresponde ao número de colunas
+  color: #777;
+  font-style: italic;
+}

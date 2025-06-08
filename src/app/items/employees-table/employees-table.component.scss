@@ -1,0 +1,66 @@
+table {
+  width: 100%;
+  border-spacing: 0 8px;
+
+  tbody tr {
+    height: 60px;
+    background-color: #F4F5FC;
+    border-radius: 4px;
+    transition: background-color 0.2s ease-in-out;
+
+    &:hover {
+      background-color: #e9eaf7;
+    }
+  }
+
+  th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+  }
+
+  th {
+    color: #5C6F88;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+  }
+
+  td {
+    color: #212529;
+    font-size: 0.95rem;
+  }
+
+  /* Ajustes de largura para colunas específicas (exemplo, ajuste conforme sua necessidade) */
+  th:nth-child(1), td:nth-child(1) { width: 20%; } /* Nome */
+  th:nth-child(2), td:nth-child(2) { width: 15%; } /* Cargo */
+  th:nth-child(3), td:nth-child(3) { width: 20%; } /* Email */
+  th:nth-child(4), td:nth-child(4) { width: 15%; } /* Telefone */
+  th:nth-child(5), td:nth-child(5) { width: 15%; } /* Departamento */
+  th:nth-child(6), td:nth-child(6) { width: 10%; } /* Data Admissão */
+  th:nth-child(7), td:nth-child(7) { width: 5%; text-align: center; } /* Ações */
+
+
+  .action-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    margin-right: 5px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+
+    img {
+      vertical-align: middle;
+    }
+
+    &:hover {
+      background-color: rgba(0,0,0,0.05);
+    }
+  }
+}
+
+td[colspan] { // Aplicar a todas as células com colspan
+  color: #777;
+  font-style: italic;
+}

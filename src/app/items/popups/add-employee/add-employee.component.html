@@ -1,0 +1,48 @@
+<div class="modal-backdrop" *ngIf="isVisible">
+  <div class="modal">
+    <h2>Adicionar Funcionário</h2>
+    <form (ngSubmit)="onSubmit(employeeForm)" #employeeForm="ngForm" style="display: flex; flex-direction: column; align-items: center; gap: 12px;">
+
+      <div class="form-field">
+        <label for="employee-name">Nome:</label>
+        <input id="employee-name" name="name" [(ngModel)]="employee.name" placeholder="Nome Completo" required />
+      </div>
+
+      <div class="form-field">
+        <label for="employee-email">Email:</label>
+        <input id="employee-email" name="email" type="email" [(ngModel)]="employee.email" placeholder="exemplo@empresa.com" required email />
+      </div>
+
+      <div class="form-field">
+        <label for="employee-phone">Telefone:</label>
+        <input id="employee-phone" name="phone" [(ngModel)]="employee.phone" placeholder="(00) 00000-0000" />
+      </div>
+
+      <div class="form-field">
+        <label for="employee-address">Endereço:</label> <input id="employee-address" name="address" [(ngModel)]="employee.address" placeholder="Rua, Número, Bairro, Cidade" />
+      </div>
+
+      <div class="form-field">
+        <label for="employee-role">Cargo:</label>
+        <input id="employee-role" name="role" [(ngModel)]="employee.role" placeholder="Ex: Desenvolvedor, Analista" required />
+      </div>
+
+      <div class="form-field">
+        <label for="employee-salary">Salário:</label> <input id="employee-salary" name="salary" type="number" [(ngModel)]="employee.salary" placeholder="Ex: 3500.50" />
+      </div>
+
+      <div class="form-field">
+        <label for="employee-hiredate">Data de Contratação:</label> <input id="employee-hiredate" name="hiredate" type="date" [(ngModel)]="employee.hiredate" required />
+      </div>
+
+      <div class="form-field">
+        <label for="employee-status">Status:</label> <input id="employee-status" name="status" [(ngModel)]="employee.status" placeholder="Ex: Ativo, Inativo, Férias" />
+        </div>
+
+      <div style="display:flex; gap: 8px; margin-top: 1rem;">
+        <button type="submit" class="btn-popup" style="background-color: lightgreen;" [disabled]="employeeForm.invalid">Adicionar</button>
+        <button type="button" (click)="close()" class="btn-popup" style="background-color: indianred;">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>

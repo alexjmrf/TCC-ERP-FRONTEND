@@ -23,6 +23,7 @@ import {AuthService} from '../../auth.service';
 export class LoginComponent {
   private readonly API_URL = 'http://localhost:8080/api/v1/users/login';
   // private readonly API_URL = 'http://54.144.81.161:8080/api/v1/users/login';
+  // private readonly API_URL = 'http://localhost:5001/api/auth/login';
 
   constructor(
     private router: Router,
@@ -42,6 +43,7 @@ export class LoginComponent {
         .subscribe({
           next: (response: any) => {
             this.authService.setToken(response.jwt);
+            // this.authService.setToken(response.access_token);
             this.authService.setOwnerId(response.id);
             this.snackBar.open(`Bem-vindo, ${response.name}!`, 'Fechar', {
               duration: 3000,
