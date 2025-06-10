@@ -1,0 +1,67 @@
+@charset "UTF-8";
+table {
+  width: 100%;
+  border-spacing: 0 8px; /* Espaçamento entre as linhas */
+  /* Ajustes de largura para colunas específicas (exemplo) */
+}
+table tbody tr {
+  height: 60px; /* Altura das linhas da tabela */
+  background-color: #F4F5FC; /* Cor de fundo das linhas */
+  border-radius: 4px; /* Bordas arredondadas para as linhas */
+  transition: background-color 0.2s ease-in-out;
+}
+table tbody tr:hover {
+  background-color: #e9eaf7; /* Cor ao passar o mouse */
+}
+table th, table td {
+  padding: 12px 15px; /* Padding aumentado para melhor leitura */
+  text-align: left; /* Alinhamento à esquerda para melhor leitura de texto */
+  border-bottom: 1px solid #e0e0e0; /* Linha sutil entre as linhas */
+}
+table th {
+  color: #5C6F88; /* Cor do texto do cabeçalho */
+  font-weight: 600; /* Peso da fonte do cabeçalho */
+  font-size: 0.9rem;
+  text-transform: uppercase; /* Transforma o texto em maiúsculas */
+}
+table td {
+  color: #212529; /* Cor do texto das células */
+  font-size: 0.95rem;
+}
+table th:nth-child(1), table td:nth-child(1) {
+  width: 25%;
+}
+table th:nth-child(2), table td:nth-child(2) {
+  width: 25%;
+}
+table th:nth-child(3), table td:nth-child(3) {
+  width: 20%;
+}
+table th:nth-child(4), table td:nth-child(4) {
+  width: 20%;
+}
+table th:nth-child(5), table td:nth-child(5) {
+  width: 10%;
+  text-align: center;
+}
+table .action-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  margin-right: 5px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+table .action-btn img {
+  vertical-align: middle;
+}
+table .action-btn:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+td[colspan="5"] {
+  color: #777;
+  font-style: italic;
+}
+
+/*# sourceMappingURL=sales-table.component.css.map */
