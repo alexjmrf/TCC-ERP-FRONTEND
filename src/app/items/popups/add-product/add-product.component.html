@@ -1,18 +1,33 @@
 <div class="modal-backdrop" *ngIf="isVisible">
   <div class="modal">
-    <h2>Add Product</h2>
+    <h2>Adicionar Produto</h2>
     <form (ngSubmit)="onSubmit()" #productForm="ngForm" style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
-      <input name="name" [(ngModel)]="product.name" placeholder="Name" required />
-      <input name="code" [(ngModel)]="product.code" placeholder="Code" required />
-      <input name="category" [(ngModel)]="product.category" placeholder="Category" required />
-      <label for="price">Preço</label>
-      <input name="price" type="number" [(ngModel)]="product.price" placeholder="Price" required />
-      <label for="profit">Lucro</label>
-      <input name="profit" type="number" [(ngModel)]="product.profit" placeholder="Profit %" required />
-      <label for="quantity">Quantidade</label>
-      <input name="quantity" type="number" [(ngModel)]="product.quantity" placeholder="Quantity" required />
-      <div style="border: 1px dashed black; padding: 4px; max-width: 205px;">
-        <input name="photo" type="file" (change)="onFileChange($event)" style="max-width: 205px;"/>
+      <div class="form-field">
+        <label for="name">Nome</label>
+        <input name="name" [(ngModel)]="product.name" placeholder="Nome" required />
+      </div>
+      <div class="form-field">
+        <label for="code">Código</label>
+        <input name="code" [(ngModel)]="product.code" placeholder="Código" required />
+      </div>
+      <div class="form-field">
+        <label for="category">Categoria</label>
+        <input name="category" [(ngModel)]="product.category" placeholder="Categoria" required />
+      </div>
+      <div class="form-field">
+        <label for="price">Preço</label>
+        <input name="price" type="number" [(ngModel)]="product.price" placeholder="Preço" required />
+      </div>
+      <div class="form-field">
+        <label for="profit">Lucro</label>
+        <input name="profit" type="number" [(ngModel)]="product.profit" placeholder="Lucro %" required />
+      </div>
+      <div class="form-field">
+        <label for="quantity">Quantidade</label>
+        <input name="quantity" type="number" [(ngModel)]="product.quantity" placeholder="Quantidade" required />
+      </div>
+      <div style="border: 1px dashed black; padding: 4px; width: 100%;">
+        <input name="photo" type="file" (change)="onFileChange($event)"/>
       </div>
       <div style="display:flex; gap: 8px;">
         <button type="submit" class="btn-popup" style="background-color: lightgreen">Add</button>

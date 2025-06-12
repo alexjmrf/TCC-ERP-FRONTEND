@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { RouterLink, Router } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
 import {AuthService} from '../../auth.service';
@@ -16,12 +16,14 @@ import {AuthService} from '../../auth.service';
     RouterLink,
     HttpClientModule,
     MatButtonModule,
+    NgOptimizedImage,
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
   private readonly API_URL = '/api/auth/login';
+  protected readonly GOOGLE_SSO = "http://localhost:8080/oauth2/authorization/google"
 
   constructor(
     private router: Router,
@@ -40,7 +42,8 @@ export class LoginComponent {
       this.http.post(this.API_URL, loginData)
         .subscribe({
           next: (response: any) => {
-            this.authService.setToken(response.access_token);
+            this.authService.setToken(response.jwt);
+            // this.authService.setToken(response.access_token);
             this.authService.setOwnerId(response.id);
             this.snackBar.open(`Bem-vindo, ${response.name}!`, 'Fechar', {
               duration: 3000,

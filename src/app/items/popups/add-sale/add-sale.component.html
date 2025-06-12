@@ -1,0 +1,73 @@
+<div class="modal-backdrop" *ngIf="isVisible">
+  <div class="modal">
+    <h2>Adicionar Venda</h2>
+    <form (ngSubmit)="onSubmit()" #saleForm="ngForm" style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+
+      <div class="form-field">
+        <mat-form-field appearance="fill">
+          <mat-label>Vendedor</mat-label>
+          <mat-select [(ngModel)]="sale.employee" name="employee" required>
+            <mat-option *ngFor="let employee of employees" [value]="employee.id">
+              {{ employee.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="form-field">
+        <mat-form-field appearance="fill">
+          <mat-label>Cliente</mat-label>
+          <mat-select [(ngModel)]="sale.client" name="client" required>
+            <mat-option *ngFor="let client of clients" [value]="client.id">
+              {{ client.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+      <div class="product-add-section" style="display: flex; gap: 8px; align-items: baseline;">
+        <mat-form-field appearance="fill">
+          <mat-label>Produto</mat-label>
+          <mat-select [(ngModel)]="selectedProductId" name="selectedProduct" required>
+            <mat-option *ngFor="let product of availableProducts" [value]="product.id">
+              {{ product.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" style="width: 100px;">
+          <mat-label>Qtd.</mat-label>
+          <input matInput type="number" [(ngModel)]="selectedProductQuantity" name="selectedProductQuantity" min="1" required>
+        </mat-form-field>
+
+        <button mat-mini-fab color="primary" type="button" (click)="addProductToSale()" [disabled]="!selectedProductId || selectedProductQuantity <= 0">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+
+      <div *ngIf="sale.products.length > 0" class="added-products-list" style="width: 100%; max-height: 150px; overflow-y: auto; border: 1px solid #ccc; padding: 8px; border-radius: 4px;">
+        <h3>Itens da Venda:</h3>
+        <ul style="list-style: none; padding: 0; margin: 0;">
+          <li *ngFor="let item of sale.products; let i = index" style="display: flex; justify-content: space-between; align-items: center; padding: 4px 0; border-bottom: 1px dashed #eee;">
+            <span>{{ item.productName }} ({{ item.quantity }}x) - R$ {{ (item.productPrice * item.quantity) | currency:'BRL':'symbol':'1.2-2' }}</span>
+            <button mat-icon-button color="warn" type="button" (click)="removeProductFromSale(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      <div class="form-field">
+        <mat-form-field appearance="fill">
+          <mat-label>Valor Total</mat-label>
+          <input matInput type="text" [value]="sale.value | currency:'BRL':'symbol':'1.2-2'" readonly>
+        </mat-form-field>
+      </div>
+
+      <div style="display:flex; gap: 8px; margin-top: 16px;">
+        <button type="submit" class="btn-popup" style="background-color: lightgreen">Adicionar</button>
+        <button type="button" (click)="close()" class="btn-popup" style="background-color: indianred">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>

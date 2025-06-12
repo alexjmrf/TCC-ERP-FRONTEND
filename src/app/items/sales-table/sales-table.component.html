@@ -1,0 +1,25 @@
+<table>
+  <thead>
+  <tr>
+    <th>Código</th>
+    <th>Vendedor</th>
+    <th>Comprador</th>
+    <th>Valor da venda</th>
+    <th>Produtos</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let row of data">
+    <td>{{ row.id }}</td>
+    <td>{{ row.employee }}</td>
+    <td>R${{ row.client }}</td>
+    <td>R${{ row.value }}</td>
+    <td>{{ row.products }}</td>
+  </tr>
+  <tr *ngIf="!data || data.length === 0">
+    <td colspan="7" style="text-align: center; padding: 20px; font-style: italic;color: #212529;font-size: 0.95rem">
+      Nenhuma venda encontrada.
+    </td>
+  </tr>
+  </tbody>
+</table>

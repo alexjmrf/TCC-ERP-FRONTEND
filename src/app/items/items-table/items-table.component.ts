@@ -1,10 +1,11 @@
 import {Component, Input} from '@angular/core';
-import {NgForOf} from '@angular/common';
+import {NgForOf, NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-items-table',
   imports: [
-    NgForOf
+    NgForOf,
+    NgIf
   ],
   templateUrl: './items-table.component.html',
   styleUrl: './items-table.component.scss'
