@@ -27,7 +27,7 @@ export class ProductsComponent {
   ) {}
 
   products: any[] = [];
-  urlAPIProducts: string = 'http://localhost:5000/api/inventory/products/';
+  urlAPIProducts: string = '/api/inventory/products/';
 
   @ViewChild('productModal') productModal!: AddProductComponent;
 

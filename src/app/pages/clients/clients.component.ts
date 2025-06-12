@@ -31,8 +31,7 @@ export class ClientsComponent implements OnInit {
   ) {}
 
   clients: any[] = [];
-  // TODO: Ajustar as URLs para funcionar independente do ambiente
-  private readonly urlAPICustomers = 'http://localhost:5002/api/customers/';
+  private readonly urlAPICustomers = '/api/customers/';
 
   @ViewChild('clientModal') clientModal!: AddClientComponent;
   @ViewChild('editClientModal') editClientModal!: EditClientComponent;
