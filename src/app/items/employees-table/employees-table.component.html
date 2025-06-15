@@ -14,16 +14,16 @@
       <td>{{ employee.role }}</td>
       <td>{{ employee.email }}</td>
       <td>{{ employee.phone || '-' }}</td>
-      <td>{{ employee.address || '-' }}</td>   
-      <td>{{ employee.salary | currency:'BRL':'symbol':'1.2-2' }}</td> 
-      <td>{{ employee.hiredate | date:'dd/MM/yyyy' }}</td> 
-      <td>{{ employee.status || '-' }}</td>    
+      <td>{{ employee.address || '-' | slice:0:30 }}...</td>
+      <td>{{ employee.salary | currency:'BRL':'symbol':'1.2-2' }}</td>
+      <td>{{ employee.hiredate | date:'dd/MM/yyyy' }}</td>
+      <td>{{ employee.status || '-' }}</td>
       <td class="action-buttons">
         <button (click)="editEmployee(employee)" title="Editar Funcionário" class="action-btn edit-btn">
           <mat-icon aria-hidden="false" aria-label="Editar" fontIcon="edit-btn"></mat-icon>
         </button>
         <button (click)="deleteEmployee(employee.id)" title="Excluir Funcionário" class="action-btn delete-btn">
-          <mat-icon aria-hidden="false" aria-label="Excluir" fontIcon="remove-icon" width="16" height="16"></mat-icon>
+          <mat-icon aria-hidden="false" aria-label="Excluir" fontIcon="remove-icon"></mat-icon>
         </button>
       </td>
     </tr>

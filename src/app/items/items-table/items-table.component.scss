@@ -31,22 +31,37 @@ table {
     font-size: 0.95rem;
   }
 
-  /* Ajustes de largura para colunas específicas (exemplo) */
-  th:nth-child(1), td:nth-child(1) { // Nome
-    width: 25%;
+  th:nth-child(1), td:nth-child(1) {
+    width: 15%;
+    text-align: center;
   }
-  th:nth-child(2), td:nth-child(2) { // Email
-    width: 25%;
+  th:nth-child(2), td:nth-child(2) {
+    width: 12.5%;
+    text-align: center;
   }
-  th:nth-child(3), td:nth-child(3) { // Telefone
-    width: 20%;
+  th:nth-child(3), td:nth-child(3) {
+    width: 15%;
+    text-align: center;
   }
-  th:nth-child(4), td:nth-child(4) { // Endereço
-    width: 20%;
+  th:nth-child(4), td:nth-child(4) {
+    width: 12.5%;
+    text-align: center;
   }
-  th:nth-child(5), td:nth-child(5) { // Ações
-    width: 10%;
-    text-align: center; // Centraliza os botões de ação
+  th:nth-child(5), td:nth-child(5) {
+    width: 12.5%;
+    text-align: center;
+  }
+  th:nth-child(6), td:nth-child(6) {
+    width: 5%;
+    text-align: center;
+  }
+  th:nth-child(7), td:nth-child(7) {
+    width: 12.5%;
+    text-align: center;
+  }
+  th:nth-child(8), td:nth-child(8) {
+    width: 15%;
+    text-align: center;
   }
 
 

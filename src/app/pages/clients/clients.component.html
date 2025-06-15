@@ -18,15 +18,6 @@
         <app-clients-table [data]="clients" (onDeleteClient)="handleDeleteClient($event)" (onEditClient)="handleOpenEditClient($event)"></app-clients-table>
       </div>
     </div>
-    <div style="width: 350px; background-color: white; border-left: 2px solid rgba(0, 0, 0, 0.3);">
-      <div style="width: 100%; display: flex; flex-direction: column; align-items: flex-start; padding: 4px 16px; border-bottom: 2px solid rgba(0, 0, 0, 0.3);">
-        <h3>Ações Rápidas</h3>
-        <div style="display: flex; flex-direction: column; gap: 8px; padding-bottom: 4px;">
-          <app-icon-btn iconName="sales.svg" buttonText="Nova Venda" width="310px" height="40px"></app-icon-btn>
-          <app-icon-btn iconName="folder-icon.svg" buttonText="Criar Grupo" width="310px" height="40px"></app-icon-btn>
-          <app-icon-btn iconName="printer-icon.svg" buttonText="Exportar Clientes" width="310px" height="40px"></app-icon-btn>
-        </div>
-      </div>
-      </div>
   </div>
+
 </div>

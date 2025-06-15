@@ -2,7 +2,6 @@
 table {
   width: 100%;
   border-spacing: 0 8px; /* Espaçamento entre as linhas */
-  /* Ajustes de largura para colunas específicas (exemplo) */
 }
 table tbody tr {
   height: 60px; /* Altura das linhas da tabela */
@@ -29,10 +28,10 @@ table td {
   font-size: 0.95rem;
 }
 table th:nth-child(1), table td:nth-child(1) {
-  width: 25%;
+  width: 5%;
 }
 table th:nth-child(2), table td:nth-child(2) {
-  width: 25%;
+  width: 20%;
 }
 table th:nth-child(3), table td:nth-child(3) {
   width: 20%;
@@ -41,7 +40,10 @@ table th:nth-child(4), table td:nth-child(4) {
   width: 20%;
 }
 table th:nth-child(5), table td:nth-child(5) {
-  width: 10%;
+  width: 20%;
+}
+table th:nth-child(6), table td:nth-child(6) {
+  width: 20%;
   text-align: center;
 }
 table .action-btn {

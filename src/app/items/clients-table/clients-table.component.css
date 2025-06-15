@@ -2,7 +2,6 @@
 table {
   width: 100%;
   border-spacing: 0 8px; /* Espaçamento entre as linhas */
-  /* Ajustes de largura para colunas específicas (exemplo) */
 }
 table tbody tr {
   height: 60px; /* Altura das linhas da tabela */
@@ -16,32 +15,32 @@ table tbody tr:hover {
 table th, table td {
   padding: 12px 15px; /* Padding aumentado para melhor leitura */
   text-align: left; /* Alinhamento à esquerda para melhor leitura de texto */
-  border-bottom: 1px solid #e0e0e0; /* Linha sutil entre as linhas */
+  border-bottom: 1px solid #e0e0e0;
 }
 table th {
-  color: #5C6F88; /* Cor do texto do cabeçalho */
-  font-weight: 600; /* Peso da fonte do cabeçalho */
+  color: #5C6F88;
+  font-weight: 600;
   font-size: 0.9rem;
-  text-transform: uppercase; /* Transforma o texto em maiúsculas */
+  text-transform: uppercase;
 }
 table td {
-  color: #212529; /* Cor do texto das células */
+  color: #212529;
   font-size: 0.95rem;
 }
 table th:nth-child(1), table td:nth-child(1) {
-  width: 25%;
+  width: 20%;
 }
 table th:nth-child(2), table td:nth-child(2) {
-  width: 25%;
+  width: 20%;
 }
 table th:nth-child(3), table td:nth-child(3) {
   width: 20%;
 }
 table th:nth-child(4), table td:nth-child(4) {
-  width: 20%;
+  width: 25%;
 }
 table th:nth-child(5), table td:nth-child(5) {
-  width: 10%;
+  width: 15%;
   text-align: center;
 }
 table .action-btn {

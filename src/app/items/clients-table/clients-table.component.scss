@@ -16,37 +16,36 @@ table {
   th, td {
     padding: 12px 15px; /* Padding aumentado para melhor leitura */
     text-align: left; /* Alinhamento à esquerda para melhor leitura de texto */
-    border-bottom: 1px solid #e0e0e0; /* Linha sutil entre as linhas */
+    border-bottom: 1px solid #e0e0e0;
   }
 
   th {
-    color: #5C6F88; /* Cor do texto do cabeçalho */
-    font-weight: 600; /* Peso da fonte do cabeçalho */
+    color: #5C6F88;
+    font-weight: 600;
     font-size: 0.9rem;
-    text-transform: uppercase; /* Transforma o texto em maiúsculas */
+    text-transform: uppercase;
   }
 
   td {
-    color: #212529; /* Cor do texto das células */
+    color: #212529;
     font-size: 0.95rem;
   }
 
-  /* Ajustes de largura para colunas específicas (exemplo) */
-  th:nth-child(1), td:nth-child(1) { // Nome
-    width: 25%;
-  }
-  th:nth-child(2), td:nth-child(2) { // Email
-    width: 25%;
-  }
-  th:nth-child(3), td:nth-child(3) { // Telefone
+  th:nth-child(1), td:nth-child(1) {
     width: 20%;
   }
-  th:nth-child(4), td:nth-child(4) { // Endereço
+  th:nth-child(2), td:nth-child(2) {
     width: 20%;
   }
-   th:nth-child(5), td:nth-child(5) { // Ações
-    width: 10%;
-    text-align: center; // Centraliza os botões de ação
+  th:nth-child(3), td:nth-child(3) {
+    width: 20%;
+  }
+  th:nth-child(4), td:nth-child(4) {
+    width: 25%;
+  }
+   th:nth-child(5), td:nth-child(5) {
+    width: 15%;
+    text-align: center;
   }
 
 
@@ -81,8 +80,7 @@ table {
   }
 }
 
-// Mensagem para quando não há dados
-td[colspan="5"] { // Certifique-se que o colspan corresponde ao número de colunas
+td[colspan="5"] {
   color: #777;
   font-style: italic;
 }

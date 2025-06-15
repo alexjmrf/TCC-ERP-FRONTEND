@@ -25,6 +25,17 @@
         </mat-form-field>
       </div>
 
+      <div class="form-field">
+        <mat-form-field appearance="fill">
+          <mat-label>Método de Pagamento</mat-label>
+          <mat-select [(ngModel)]="sale.paymentMethod" name="saleMethod" required>
+            <mat-option *ngFor="let method of paymentMethods" [value]="method">
+              {{ method }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
       <div class="product-add-section" style="display: flex; gap: 8px; align-items: baseline;">
         <mat-form-field appearance="fill">
           <mat-label>Produto</mat-label>
@@ -49,7 +60,7 @@
         <h3>Itens da Venda:</h3>
         <ul style="list-style: none; padding: 0; margin: 0;">
           <li *ngFor="let item of sale.products; let i = index" style="display: flex; justify-content: space-between; align-items: center; padding: 4px 0; border-bottom: 1px dashed #eee;">
-            <span>{{ item.productName }} ({{ item.quantity }}x) - R$ {{ (item.productPrice * item.quantity) | currency:'BRL':'symbol':'1.2-2' }}</span>
+            <span>{{ item.productName }} ({{ item.quantity }}x) - R$ {{ (item.price * item.quantity) | currency:'BRL':'symbol':'1.2-2' }}</span>
             <button mat-icon-button color="warn" type="button" (click)="removeProductFromSale(i)">
               <mat-icon>delete</mat-icon>
             </button>

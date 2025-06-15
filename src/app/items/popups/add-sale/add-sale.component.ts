@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, OnInit } from '@angular/core';
+import {Component, EventEmitter, Output, OnInit, Input} from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgIf, NgFor, CommonModule } from '@angular/common';
 
@@ -22,7 +22,7 @@ interface SaleItem {
   productId: string;
   quantity: number;
   productName?: string;
-  productPrice: number;
+  price: number;
 }
 
 interface Employee {
@@ -33,6 +33,9 @@ interface Employee {
 interface Client {
   id: string;
   name: string;
+  email: string;
+  address: string;
+  phone: string;
 }
 
 @Component({
@@ -58,72 +61,51 @@ export class AddSaleComponent implements OnInit {
   isVisible = false;
   @Output() saleAdded = new EventEmitter<{ sale: any }>();
 
+  @Input() clients: Client[] = [];
+  @Input() employees: Employee[] = [];
+  @Input() availableProducts: Product[] = [];
+
   sale = {
     id: '',
     employee: '',
     client: '',
     value: 0,
+    paymentMethod: '',
     products: [] as SaleItem[]
   };
 
+  outputSale = {
+    clientId: '',
+    employeeId: '',
+    date: '',
+    paymentMethod: '',
+    items: [] as SaleItem[]
+  };
+
+  paymentMethods: string[] = ["CRÉDITO", "DÉBITO", "PIX"];
+
+  urlAPISales: string = 'http://localhost:8080/api/sales/';
+
   selectedProductId: string | null = null;
   selectedProductQuantity: number = 1;
-
-  employees: Employee[] = [
-    { id: 'emp001', name: 'Chico' },
-    { id: 'emp002', name: 'Cláudio' },
-    { id: 'emp003', name: 'Marcos' }
-  ];
-
-  clients: Client[] = [
-    { id: 'cli001', name: 'Fernanda' },
-    { id: 'cli002', name: 'Maurício' },
-    { id: 'cli003', name: 'César' }
-  ];
-
-  availableProducts: Product[] = [
-    { id: '001', name: 'Bola de Futebol', price: 10, quantity: 2},
-    { id: '002', name: 'Carrinho', price: 15, quantity: 1},
-    { id: '003', name: 'Espada de Plástico', price: 5, quantity: 4}
-  ];
-
-  private readonly API_BASE_URL = 'http://localhost:8080/api/v1';
-  private readonly EMPLOYEES_API_URL = `${this.API_BASE_URL}/employees`;
-  private readonly CLIENTS_API_URL = `${this.API_BASE_URL}/clients`;
-  private readonly PRODUCTS_API_URL = `${this.API_BASE_URL}/products`;
 
   constructor(private http: HttpClient, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
   }
 
-  open() {
+  open(clients: Client[], employees: Employee[], products: Product[]): void {
     this.isVisible = true;
-    this.loadData();
+    this.clients = clients;
+    this.employees = employees;
+    this.availableProducts = products;
+    this.resetForm();
   }
 
   close() {
     this.isVisible = false;
     this.resetForm();
   }
-
-  private loadData(): void {
-    // this.http.get<any[]>(this.EMPLOYEES_API_URL).subscribe({
-    //   next: (data) => this.employees = data,
-    //   error: (err) => console.error('Erro ao carregar funcionários:', err)
-    // });
-    //
-    // this.http.get<any[]>(this.CLIENTS_API_URL).subscribe({
-    //   next: (data) => this.clients = data,
-    //   error: (err) => console.error('Erro ao carregar clientes:', err)
-    // });
-    //
-    // this.http.get<Product[]>(this.PRODUCTS_API_URL).subscribe({
-    //   next: (data) => this.availableProducts = data,
-    //   error: (err) => console.error('Erro ao carregar produtos:', err)
-    // });
-  }
-
 
   addProductToSale(): void {
     if (!this.selectedProductId || this.selectedProductQuantity <= 0) {
@@ -147,7 +129,7 @@ export class AddSaleComponent implements OnInit {
 
     if (existingItemIndex > -1) {
       const existingItem = this.sale.products[existingItemIndex];
-      newQuantityInSale = existingItem.quantity + this.selectedProductQuantity; // Quantidade total após a adição
+      newQuantityInSale = existingItem.quantity + this.selectedProductQuantity;
     }
 
     if (newQuantityInSale > availableStock) {
@@ -166,7 +148,7 @@ export class AddSaleComponent implements OnInit {
         productId: productToAdd.id,
         quantity: this.selectedProductQuantity,
         productName: productToAdd.name,
-        productPrice: productToAdd.price,
+        price: productToAdd.price,
       });
     }
 
@@ -190,13 +172,8 @@ export class AddSaleComponent implements OnInit {
   }
 
   onSubmit() {
-    if(this.sale.employee.trim().length <= 0){
-      this.snackBar.open('Escolha um vendedor.', 'Fechar', { duration: 3000, panelClass: ['error-snackbar'] });
-      return;
-    }
-
-    if(this.sale.client.trim().length <= 0){
-      this.snackBar.open('Escolha um cliente.', 'Fechar', { duration: 3000, panelClass: ['error-snackbar'] });
+    if (!this.sale.paymentMethod || this.sale.paymentMethod.trim().length === 0) {
+      this.snackBar.open('Informe o método de pagamento.', 'Fechar', { duration: 3000, panelClass: ['error-snackbar'] });
       return;
     }
 
@@ -204,18 +181,56 @@ export class AddSaleComponent implements OnInit {
       this.snackBar.open('Adicione pelo menos um produto à venda.', 'Fechar', { duration: 3000, panelClass: ['error-snackbar'] });
       return;
     }
-    this.saleAdded.emit({ sale: this.sale});
-    this.close();
+
+    this.outputSale.employeeId = this.sale.employee;
+    this.outputSale.clientId = this.sale.client;
+    this.outputSale.paymentMethod = this.sale.paymentMethod;
+    // @ts-ignore
+    this.outputSale.date = new Date().toISOString();
+    this.outputSale.items = this.sale.products;
+
+    debugger
+    this.http.post(this.urlAPISales, this.outputSale, { withCredentials: true }).subscribe({
+      next: (response) => {
+        console.log('Venda registrada com sucesso:', response);
+        this.snackBar.open(`Venda registrada!`, 'Fechar', {
+          duration: 1000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: ['success-snackbar']
+        });
+        this.saleAdded.emit({ sale: response });
+        this.close();
+      },
+      error: (error) => {
+        console.error('Erro ao registrar venda:', error);
+        this.snackBar.open('Erro ao registrar venda', 'Fechar', {
+          duration: 1000,
+          panelClass: ['error-snackbar']
+        });
+      },
+    });
   }
 
   private resetForm(): void {
+
     this.sale = {
       id: '',
       employee: '',
       client: '',
       value: 0,
-      products: []
+      paymentMethod: '',
+      products: [] as SaleItem[]
     };
+
+    this.outputSale = {
+      clientId: '',
+      employeeId: '',
+      date: '',
+      paymentMethod: '',
+      items: [] as SaleItem[]
+    };
+
     this.selectedProductId = null;
     this.selectedProductQuantity = 1;
   }

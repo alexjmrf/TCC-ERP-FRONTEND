@@ -16,16 +16,5 @@
       <div style="margin: 16px;">
         <app-items-table [data]="products" (onDeleteProduct)="handleDeleteProduct($event)" (onEditProduct)="handleOpenEditProduct($event)"></app-items-table> </div>
     </div>
-    <div style="width: 350px; background-color: white; border-left: 2px solid #0000004D;">
-      <div style="width: 100%; display: flex; flex-direction: column; align-items: flex-start; padding: 4px 16px; border-bottom: 2px solid #0000004D;">
-        <h3>Ações Rápidas</h3>
-        <div style="display: flex; flex-direction: column; gap: 8px; padding-bottom: 4px;">
-          <app-icon-btn iconName="briefcase-icon.svg" buttonText="Criar Ordem" width="310px" height="40px"></app-icon-btn>
-          <app-icon-btn iconName="folder-icon.svg" buttonText="Criar Categoria" width="310px" height="40px"></app-icon-btn>
-          <app-icon-btn iconName="box-icon.svg" buttonText="Adicionar Depósito" width="310px" height="40px"></app-icon-btn>
-          <app-icon-btn style="margin-bottom: 8px;" iconName="printer-icon" buttonText="Exportar Estoque" width="310px" height="40px"></app-icon-btn>
-        </div>
-      </div>
-    </div>
   </div>
 </div>

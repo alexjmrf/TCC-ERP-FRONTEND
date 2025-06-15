@@ -5,16 +5,16 @@
     <th>Vendedor</th>
     <th>Comprador</th>
     <th>Valor da venda</th>
-    <th>Produtos</th>
+    <th>Data</th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let row of data">
     <td>{{ row.id }}</td>
-    <td>{{ row.employee }}</td>
-    <td>R${{ row.client }}</td>
-    <td>R${{ row.value }}</td>
-    <td>{{ row.products }}</td>
+    <td>{{ row.employee.name }}</td>
+    <td>{{ row.client.name }}</td>
+    <td>{{ row.total | currency:'BRL':'symbol':'1.2-2' }}</td>
+    <td>{{ row.date | date:'dd/MM/yyyy HH:mm:ss' }}</td>
   </tr>
   <tr *ngIf="!data || data.length === 0">
     <td colspan="7" style="text-align: center; padding: 20px; font-style: italic;color: #212529;font-size: 0.95rem">

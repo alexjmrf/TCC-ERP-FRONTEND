@@ -14,6 +14,7 @@ import {SalesTableComponent} from '../../items/sales-table/sales-table.component
     SearchBarComponent,
     AddSaleComponent,
     SalesTableComponent,
+    AddSaleComponent,
   ],
   templateUrl: './sales.component.html',
   styleUrl: './sales.component.scss'
@@ -27,9 +28,10 @@ export class SalesComponent {
   ) {}
 
   sales: any[] = [];
-  urlAPISales: string = 'http://localhost:5000/api/inventory/sales/';
-  urlRegisterSales: string = 'http://localhost:8080/api/v1/sales/register';
-  urlGetAll: string = 'http://localhost:8080/api/v1/sales/';
+  clients: any[] = [];
+  employees: any[] = [];
+  products: any[] = [];
+  urlAPISalesOverView: string = 'http://localhost:8080/api/sales/overview';
 
   @ViewChild('salesModal') saleModal!: AddSaleComponent;
 
@@ -38,60 +40,29 @@ export class SalesComponent {
   }
 
   loadSales(): void {
-    // this.http.get<any[]>(this.urlGetAll + this.authService.getOwnerId()).subscribe({
-    //   // this.http.get<any[]>(`${this.urlAPIProducts}`, { withCredentials: true }).subscribe({
-    //   next: (data) => {
-    //     this.sales = data;
-    //     console.log('Vendas carregadas:', data);
-    //   },
-    //   error: (err) => {
-    //     console.error('Erro ao carregar vendas:', err);
-    //     this.snackBar.open('Erro ao carregar vendas', 'Fechar', {
-    //       duration: 2000,
-    //       panelClass: ['error-snackbar']
-    //     });
-    //   }
-    // });
+    this.http.get<any>(`${this.urlAPISalesOverView}`, { withCredentials: true }).subscribe({
+      next: (data: any) => {
+        this.clients = data.customers;
+        this.employees = data.employees;
+        this.sales = data.sales;
+        this.products = data.products;
+        console.log('Clientes carregados:', this.clients);
+        console.log('Funcionários carregados:', this.employees);
+        console.log('Produtos carregados:', this.products);
+        console.log('Vendas carregadas:', this.sales);
+      },
+      error: (err) => {
+        console.error('Erro ao carregar dados:', err);
+        this.snackBar.open('Erro ao carregar dados de vendas, clientes e funcionários', 'Fechar', {
+          duration: 2000,
+          panelClass: ['error-snackbar']
+        });
+      }
+    });
   }
 
   openPopup() {
-    this.saleModal.open();
+    this.saleModal.open(this.clients, this.employees, this.products);
   }
-
-  handleSaleAdded(event: { sale: any; }): void {
-    const { sale } = event;
-    //
-    // const formData = new FormData();
-    //
-    // product.ownerId = this.authService.getOwnerId();
-    // formData.append('product', new Blob([JSON.stringify(product)], { type: 'application/json' }));
-    //
-    // if (file) {
-    //   formData.append('image', file);
-    // }
-    //
-    // // Enviando o FormData via POST para o backend
-    // this.http.post(this.urlRegister, formData).subscribe({
-    //   // this.http.post(this.urlAPIProducts, formData).subscribe({
-    //   next: (response) => {
-    //     console.log('Produto enviado com sucesso:', response);
-    //     this.products.push(product); // Adicionando o produto à lista
-    //     this.snackBar.open(`${product.name} cadastrado!`, 'Fechar', {
-    //       duration: 1000, // 1 segundo
-    //       horizontalPosition: 'right',
-    //       verticalPosition: 'top',
-    //       panelClass: ['success-snackbar']
-    //     });
-    //   },
-    //   error: (error) => {
-    //     console.log('Erro ao cadastrar produto:', error);
-    //     this.snackBar.open('Erro ao cadastrar produto', 'Fechar', {
-    //       duration: 1000,
-    //       panelClass: ['error-snackbar']
-    //     });
-    //   },
-    // });
-  }
-
 }
 

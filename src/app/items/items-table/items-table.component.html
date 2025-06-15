@@ -4,9 +4,9 @@
     <th>Produto</th>
     <th>Código</th>
     <th>Categoria</th>
-    <th>Preço de Venda</th>
-    <th>Lucro por Venda</th>
-    <th>Quantidade</th>
+    <th>Preço</th>
+    <th>Lucro</th>
+    <th>Qtd</th>
     <th>Foto</th>
     <th>Ações</th> </tr>
   </thead>
@@ -15,8 +15,8 @@
     <td>{{ row.name }}</td>
     <td>{{ row.code }}</td>
     <td>{{ row.category }}</td>
-    <td>R${{ row.price }}</td>
-    <td>R${{ row.profit }}</td>
+    <td>{{ row.price | currency:'BRL':'symbol':'1.2-2' }}</td>
+    <td>{{ row.profit | currency:'BRL':'symbol':'1.2-2' }}</td>
     <td>{{ row.quantity }}</td>
     <td><img style="width: 70px; height: 70px;" src="{{ row.photo }}" alt="product image"></td>
     <td class="action-buttons">

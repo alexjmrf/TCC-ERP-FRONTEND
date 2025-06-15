@@ -18,12 +18,5 @@
         <app-employees-table [data]="employees" (onDeleteEmployee)="handleDeleteEmployee($event)" (onEditEmployee)="handleOpenEditEmployee($event)"></app-employees-table>
       </div>
     </div>
-    <div style="width: 350px; background-color: white; border-left: 2px solid rgba(0, 0, 0, 0.3);">
-      <div style="width: 100%; display: flex; flex-direction: column; align-items: flex-start; padding: 4px 16px; border-bottom: 2px solid rgba(0, 0, 0, 0.3);">
-        <h3>Ações Rápidas</h3>
-        <div style="display: flex; flex-direction: column; gap: 8px; padding-bottom: 4px;">
-          <app-icon-btn iconName="payroll-icon.svg" buttonText="Processar Folha" width="310px" height="40px"></app-icon-btn> <app-icon-btn iconName="permissions-icon.svg" buttonText="Gerenciar Cargos" width="310px" height="40px"></app-icon-btn> <app-icon-btn iconName="reports-icon.svg" buttonText="Relatórios de RH" width="310px" height="40px"></app-icon-btn> </div>
-      </div>
-    </div>
   </div>
 </div>
