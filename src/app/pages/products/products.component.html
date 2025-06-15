@@ -5,7 +5,7 @@
     <app-search-bar style="width: 50%"></app-search-bar>
     <app-icon-btn iconName="add-icon.svg" buttonText="Adicionar Produto" width="160px" height="40px" (click)="openPopup()"></app-icon-btn>
     <app-add-product #productModal (productAdded)="handleProductAdded($event)"></app-add-product>
-    <app-icon-btn iconName="remove-icon.svg" buttonText="Remover Produto" width="160px" height="40px"></app-icon-btn>
+    <app-edit-product #editProductModal (productUpdated)="handleProductUpdated($event)"></app-edit-product> <app-icon-btn iconName="remove-icon.svg" buttonText="Remover Produto" width="160px" height="40px"></app-icon-btn>
     <app-icon-btn iconName="down-arrow-icon.svg" buttonText="Outras ações" width="160px" height="40px"></app-icon-btn>
   </div>
 
@@ -14,8 +14,7 @@
       <p style="margin: 16px 16px 16px 40px; font-weight: bold;">Lista de Produtos</p>
       <hr style="border: 1px solid #0000004D; margin: 2px 16px;">
       <div style="margin: 16px;">
-        <app-items-table [data]="products"></app-items-table>
-      </div>
+        <app-items-table [data]="products" (onDeleteProduct)="handleDeleteProduct($event)" (onEditProduct)="handleOpenEditProduct($event)"></app-items-table> </div>
     </div>
     <div style="width: 350px; background-color: white; border-left: 2px solid #0000004D;">
       <div style="width: 100%; display: flex; flex-direction: column; align-items: flex-start; padding: 4px 16px; border-bottom: 2px solid #0000004D;">
@@ -24,7 +23,7 @@
           <app-icon-btn iconName="briefcase-icon.svg" buttonText="Criar Ordem" width="310px" height="40px"></app-icon-btn>
           <app-icon-btn iconName="folder-icon.svg" buttonText="Criar Categoria" width="310px" height="40px"></app-icon-btn>
           <app-icon-btn iconName="box-icon.svg" buttonText="Adicionar Depósito" width="310px" height="40px"></app-icon-btn>
-          <app-icon-btn style="margin-bottom: 8px;" iconName="printer-icon.svg" buttonText="Exportar Estoque" width="310px" height="40px"></app-icon-btn>
+          <app-icon-btn style="margin-bottom: 8px;" iconName="printer-icon" buttonText="Exportar Estoque" width="310px" height="40px"></app-icon-btn>
         </div>
       </div>
     </div>

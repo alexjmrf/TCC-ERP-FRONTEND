@@ -1,0 +1,47 @@
+<div class="modal-overlay" [class.show]="isOpen">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Editar Produto</h2>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="productForm" (ngSubmit)="onSubmit()" style="display: flex; flex-direction: column; align-items: center; gap: 12px;">
+        <div class="form-group">
+          <label for="name">Nome:</label>
+          <input id="name" type="text" formControlName="name" required>
+        </div>
+        <div class="form-group">
+          <label for="code">Código:</label>
+          <input id="code" type="text" formControlName="code" required>
+        </div>
+        <div class="form-group">
+          <label for="category">Categoria:</label>
+          <input id="category" type="text" formControlName="category" required>
+        </div>
+        <div class="form-group">
+          <label for="price">Preço:</label>
+          <input id="price" type="number" formControlName="price" required>
+        </div>
+        <div class="form-group">
+          <label for="profit">Lucro (%):</label>
+          <input id="profit" type="number" formControlName="profit" required>
+        </div>
+        <div class="form-group">
+          <label for="quantity">Quantidade:</label>
+          <input id="quantity" type="number" formControlName="quantity" required>
+        </div>
+        <div class="form-group">
+          <label for="photo">Foto:</label>
+          <input id="photo" type="file" (change)="onFileChange($event)">
+          <div *ngIf="currentProductPhoto" style="margin-top: 10px;">
+            <p>Foto atual:</p>
+            <img [src]="currentProductPhoto" alt="Product Image" style="max-width: 100px; max-height: 100px;">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-cancel" (click)="close()">Cancelar</button>
+          <button type="submit" class="btn-save" [disabled]="!productForm.valid">Salvar Alterações</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,29 +1,37 @@
 <table>
   <thead>
-    <tr>
-      <th>Produto</th>
-      <th>Código</th>
-      <th>Categoria</th>
-      <th>Preço de Venda</th>
-      <th>Lucro por Venda</th>
-      <th>Quantidade</th>
-      <th>Foto</th>
-    </tr>
+  <tr>
+    <th>Produto</th>
+    <th>Código</th>
+    <th>Categoria</th>
+    <th>Preço de Venda</th>
+    <th>Lucro por Venda</th>
+    <th>Quantidade</th>
+    <th>Foto</th>
+    <th>Ações</th> </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let row of data">
-      <td>{{ row.name }}</td>
-      <td>{{ row.code }}</td>
-      <td>{{ row.category }}</td>
-      <td>R${{ row.price }}</td>
-      <td>R${{ row.profit }}</td>
-      <td>{{ row.quantity }}</td>
-      <td><img style="width: 70px; height: 70px;" src="{{ row.photo }}" alt="product image"></td>
-    </tr>
-    <tr *ngIf="!data || data.length === 0">
-      <td colspan="7" style="text-align: center; padding: 20px; font-style: italic;color: #212529;font-size: 0.95rem">
-        Nenhum produto encontrado.
-      </td>
-    </tr>
+  <tr *ngFor="let row of data">
+    <td>{{ row.name }}</td>
+    <td>{{ row.code }}</td>
+    <td>{{ row.category }}</td>
+    <td>R${{ row.price }}</td>
+    <td>R${{ row.profit }}</td>
+    <td>{{ row.quantity }}</td>
+    <td><img style="width: 70px; height: 70px;" src="{{ row.photo }}" alt="product image"></td>
+    <td class="action-buttons">
+      <button (click)="editProduct(row)" title="Editar Produto" class="action-btn edit-btn">
+        <mat-icon aria-hidden="false" aria-label="Editar" fontIcon="edit-btn"></mat-icon>
+      </button>
+      <button (click)="deleteProduct(row.id)" title="Excluir Produto" class="action-btn delete-btn">
+        <mat-icon aria-hidden="false" aria-label="Excluir" fontIcon="remove-icon" ></mat-icon>
+      </button>
+    </td>
+  </tr>
+  <tr *ngIf="!data || data.length === 0">
+    <td colspan="8" style="text-align: center; padding: 20px; font-style: italic;color: #212529;font-size: 0.95rem">
+      Nenhum produto encontrado.
+    </td>
+  </tr>
   </tbody>
 </table>
