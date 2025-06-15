@@ -59,6 +59,16 @@ table .action-btn img {
 table .action-btn:hover {
   background-color: rgba(0, 0, 0, 0.05);
 }
+table .action-buttons {
+  display: flex;
+}
+table .action-buttons .action-btn {
+  display: flex;
+}
+table .action-buttons .action-btn:hover {
+  background-color: #dcdcdc;
+}
+
 td[colspan="5"] {
   color: #777;
   font-style: italic;

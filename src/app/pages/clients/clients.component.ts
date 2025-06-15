@@ -2,10 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AuthService } from '../../auth.service'; //
-import { SearchBarComponent } from "../../items/search-bar/search-bar.component"; //
-import { IconBtnComponent } from '../../items/icon-btn/icon-btn.component'; //
-import { ClientsTableComponent } from '../../items/clients-table/clients-table.component'; //  Componente específico para clientes
-import { AddClientComponent } from '../../items/popups/add-client/add-client.component'; // Popup para adicionar cliente
+import { SearchBarComponent } from "../../items/search-bar/search-bar.component";
+import { IconBtnComponent } from '../../items/icon-btn/icon-btn.component';
+import { ClientsTableComponent } from '../../items/clients-table/clients-table.component';
+import { AddClientComponent } from '../../items/popups/add-client/add-client.component';
 import { CommonModule } from '@angular/common';
 import { EditClientComponent } from '../../items/popups/edit-client/edit-client.component';
 

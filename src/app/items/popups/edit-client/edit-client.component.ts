@@ -49,9 +49,6 @@ export class EditClientComponent {
     this.clientId = null;
   }
 
-  /**
-   * Chamado ao submeter o formulário. Emite o evento com os dados atualizados.
-   */
   onSubmit(): void {
     if (this.clientForm.valid && this.clientId) {
       // Emite um objeto contendo o ID e os dados atualizados do formulário

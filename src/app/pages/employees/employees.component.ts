@@ -16,7 +16,7 @@ import { EditEmployeeComponent } from '../../items/popups/edit-employee/edit-emp
     CommonModule,
     SearchBarComponent,
     IconBtnComponent,
-    EmployeesTableComponent, 
+    EmployeesTableComponent,
     AddEmployeeComponent,
     EditEmployeeComponent
   ],

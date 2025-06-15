@@ -78,4 +78,14 @@ td[colspan] {
   font-style: italic;
 }
 
+.action-buttons {
+  display: flex;
+}
+.action-buttons .action-btn {
+  display: flex;
+}
+.action-buttons .action-btn:hover {
+  background-color: #dcdcdc;
+}
+
 /*# sourceMappingURL=employees-table.component.css.map */
