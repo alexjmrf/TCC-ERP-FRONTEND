@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgIf, NgFor, CommonModule } from '@angular/common';
 
@@ -59,7 +59,6 @@ interface Client {
 })
 export class AddSaleComponent implements OnInit {
   isVisible = false;
-  @Output() saleAdded = new EventEmitter<{ sale: any }>();
 
   @Input() clients: Client[] = [];
   @Input() employees: Employee[] = [];
@@ -189,7 +188,6 @@ export class AddSaleComponent implements OnInit {
     this.outputSale.date = new Date().toISOString();
     this.outputSale.items = this.sale.products;
 
-    debugger
     this.http.post(this.urlAPISales, this.outputSale, { withCredentials: true }).subscribe({
       next: (response) => {
         console.log('Venda registrada com sucesso:', response);
@@ -199,7 +197,6 @@ export class AddSaleComponent implements OnInit {
           verticalPosition: 'top',
           panelClass: ['success-snackbar']
         });
-        this.saleAdded.emit({ sale: response });
         this.close();
       },
       error: (error) => {
