@@ -31,7 +31,7 @@ export class SalesComponent {
   clients: any[] = [];
   employees: any[] = [];
   products: any[] = [];
-  urlAPISalesOverView: string = 'http://localhost:8080/api/sales/overview';
+  urlAPISales: string = 'http://localhost:8080/api/sales/';
 
   @ViewChild('salesModal') saleModal!: AddSaleComponent;
 
@@ -40,16 +40,12 @@ export class SalesComponent {
   }
 
   loadSales(): void {
-    this.http.get<any>(`${this.urlAPISalesOverView}`, { withCredentials: true }).subscribe({
+    this.http.get<any>(`${this.urlAPISales}` + "overview", { withCredentials: true }).subscribe({
       next: (data: any) => {
         this.clients = data.customers;
         this.employees = data.employees;
         this.sales = data.sales;
         this.products = data.products;
-        console.log('Clientes carregados:', this.clients);
-        console.log('Funcionários carregados:', this.employees);
-        console.log('Produtos carregados:', this.products);
-        console.log('Vendas carregadas:', this.sales);
       },
       error: (err) => {
         console.error('Erro ao carregar dados:', err);
@@ -63,6 +59,29 @@ export class SalesComponent {
 
   openPopup() {
     this.saleModal.open(this.clients, this.employees, this.products);
+  }
+
+  handleDeleteSale(saleId: string): void {
+    if (confirm('Tem certeza de que deseja excluir esta venda?')) {
+      this.http.delete(`${this.urlAPISales}${saleId}`, { withCredentials: true }).subscribe({
+        next: () => {
+          this.snackBar.open('Venda excluída com sucesso!', 'Fechar', {
+            duration: 3000,
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            panelClass: ['success-snackbar']
+          });
+          this.loadSales();
+        },
+        error: (error) => {
+          console.error('Erro ao excluir venda:', error);
+          this.snackBar.open('Erro ao excluir venda.', 'Fechar', {
+            duration: 3000,
+            panelClass: ['error-snackbar']
+          });
+        }
+      });
+    }
   }
 }
 

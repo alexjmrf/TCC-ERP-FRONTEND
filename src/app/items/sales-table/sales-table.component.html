@@ -6,6 +6,7 @@
     <th>Comprador</th>
     <th>Valor da venda</th>
     <th>Data</th>
+    <th>Ações</th>
   </tr>
   </thead>
   <tbody>
@@ -15,6 +16,11 @@
     <td>{{ row.client.name }}</td>
     <td>{{ row.total | currency:'BRL':'symbol':'1.2-2' }}</td>
     <td>{{ row.date | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+    <td class="action-buttons">
+      <button (click)="deleteSale(row.id)" title="Excluir Produto" class="action-btn delete-btn">
+        <mat-icon aria-hidden="false" aria-label="Excluir" fontIcon="remove-icon" ></mat-icon>
+      </button>
+    </td>
   </tr>
   <tr *ngIf="!data || data.length === 0">
     <td colspan="7" style="text-align: center; padding: 20px; font-style: italic;color: #212529;font-size: 0.95rem">

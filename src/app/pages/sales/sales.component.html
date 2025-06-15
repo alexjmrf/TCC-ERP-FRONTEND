@@ -15,7 +15,7 @@
       <p style="margin: 16px 16px 16px 40px; font-weight: bold;">Lista de Vendas</p>
       <hr style="border: 1px solid #0000004D; margin: 2px 16px;">
       <div style="margin: 16px;">
-        <app-sales-table [data]="sales"></app-sales-table>
+        <app-sales-table [data]="sales" (onDeleteSale)="handleDeleteSale($event)"></app-sales-table>
       </div>
     </div>
   </div>
