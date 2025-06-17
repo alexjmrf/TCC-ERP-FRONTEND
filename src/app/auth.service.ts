@@ -1,41 +1,58 @@
-import { Injectable } from '@angular/core';
+import {Inject, Injectable, PLATFORM_ID} from '@angular/core';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {isPlatformBrowser} from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
 
-  constructor(
-    private router: Router,
-    private snackBar: MatSnackBar
-  ) {}
+  private readonly isBrowser: boolean;
 
-  isAuthenticated(): boolean {
-    const token = localStorage.getItem('jwt');
-    return !!token; // Retorna true se o token existir
-  }
-
-  getToken(): string | null {
-    return localStorage.getItem('jwt');
+  constructor(private router: Router, @Inject(PLATFORM_ID) private platformId: object, private snackBar: MatSnackBar) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
   }
 
   setToken(token: string): void {
-    localStorage.setItem('jwt', token);
+    if (this.isBrowser) {
+      localStorage.setItem('jwt', token);
+    }
   }
 
-  getOwnerId(): string | null {
-    return localStorage.getItem('userId');
+  getToken(): string | null {
+    if (this.isBrowser) {
+      return localStorage.getItem('jwt');
+    }
+    return null;
   }
 
   setOwnerId(id: string): void {
-    localStorage.setItem('userId', id);
+    if (this.isBrowser) {
+      localStorage.setItem('ownerId', id);
+    }
+  }
+
+  getOwnerId(): string | null {
+    if (this.isBrowser) {
+      return localStorage.getItem('ownerId');
+    }
+    return null;
+  }
+
+  isAuthenticated(): boolean {
+    if (this.isBrowser) {
+      const token = this.getToken();
+      return !!token;
+    }
+    return false;
   }
 
   logout() {
-    localStorage.removeItem('jwt');
-    localStorage.removeItem('userId');
+    if (this.isBrowser) {
+      localStorage.removeItem('jwt');
+      localStorage.removeItem('ownerId');
+    }
 
     this.router.navigate(['/login']);
 
