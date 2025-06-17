@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIf, NgFor, CommonModule } from '@angular/common';
 
@@ -43,6 +43,7 @@ export class AddSaleComponent implements OnInit {
   @Input() clients: Client[] = [];
   @Input() employees: Employee[] = [];
   @Input() availableProducts: Product[] = [];
+  @Output() saleAdded = new EventEmitter<void>();
 
   sale = {
     id: '',
@@ -168,7 +169,6 @@ export class AddSaleComponent implements OnInit {
     this.outputSale.paymentMethod = this.sale.paymentMethod;
     // @ts-ignore
     this.outputSale.date = new Date(this.sale.date).toISOString();
-    // this.outputSale.date = new Date().toISOString();
     this.outputSale.items = this.sale.products;
 
     this.http.post(this.urlAPISales, this.outputSale, { withCredentials: true }).subscribe({
@@ -180,6 +180,7 @@ export class AddSaleComponent implements OnInit {
           verticalPosition: 'top',
           panelClass: ['success-snackbar']
         });
+        this.saleAdded.emit();
         this.close();
       },
       error: (error) => {
