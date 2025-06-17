@@ -15,7 +15,7 @@
     <td>{{ row.employee.name }}</td>
     <td>{{ row.client.name }}</td>
     <td>{{ row.total | currency:'BRL':'symbol':'1.2-2' }}</td>
-    <td>{{ row.date | date:'dd/MM/yyyy HH:mm:ss' }}</td>
+    <td>{{ row.date | date:'dd/MM/yyyy' }}</td>
     <td class="action-buttons">
       <button (click)="deleteSale(row.id)" title="Excluir Produto" class="action-btn delete-btn">
         <mat-icon aria-hidden="false" aria-label="Excluir" fontIcon="remove-icon" ></mat-icon>

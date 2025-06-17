@@ -1,5 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { NgIf, NgFor, CommonModule } from '@angular/common';
 
 
@@ -10,33 +10,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
-interface Product {
-  id: string;
-  name: string;
-  price: number;
-  quantity: number;
-}
-
-interface SaleItem {
-  productId: string;
-  quantity: number;
-  productName?: string;
-  price: number;
-}
-
-interface Employee {
-  id: string;
-  name: string;
-}
-
-interface Client {
-  id: string;
-  name: string;
-  email: string;
-  address: string;
-  phone: string;
-}
+interface Product { id: string; name: string; price: number; quantity: number; }
+interface SaleItem { productId: string; quantity: number; productName?: string; price: number; }
+interface Employee { id: string; name: string; }
+interface Client { id: string; name: string; email: string; address: string; phone: string; }
 
 @Component({
   selector: 'app-add-sale',
@@ -46,13 +26,14 @@ interface Client {
     NgIf,
     NgFor,
     CommonModule,
-    ReactiveFormsModule,
     MatSelectModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatDatepickerModule,
   ],
+  providers: [provideNativeDateAdapter()],
   templateUrl: './add-sale.component.html',
   styleUrl: './add-sale.component.scss'
 })
@@ -69,6 +50,8 @@ export class AddSaleComponent implements OnInit {
     client: '',
     value: 0,
     paymentMethod: '',
+  // @ts-ignore
+    date: new Date(),
     products: [] as SaleItem[]
   };
 
@@ -80,7 +63,7 @@ export class AddSaleComponent implements OnInit {
     items: [] as SaleItem[]
   };
 
-  paymentMethods: string[] = ["CRÉDITO", "DÉBITO", "PIX"];
+  paymentMethods: string[] = ["CRÉDITO", "DÉBITO", "PIX", "DINHEIRO"];
 
   urlAPISales: string = 'http://localhost:8080/api/sales/';
 
@@ -184,7 +167,8 @@ export class AddSaleComponent implements OnInit {
     this.outputSale.clientId = this.sale.client;
     this.outputSale.paymentMethod = this.sale.paymentMethod;
     // @ts-ignore
-    this.outputSale.date = new Date().toISOString();
+    this.outputSale.date = new Date(this.sale.date).toISOString();
+    // this.outputSale.date = new Date().toISOString();
     this.outputSale.items = this.sale.products;
 
     this.http.post(this.urlAPISales, this.outputSale, { withCredentials: true }).subscribe({
@@ -216,6 +200,8 @@ export class AddSaleComponent implements OnInit {
       client: '',
       value: 0,
       paymentMethod: '',
+      // @ts-ignore
+      date: new Date(),
       products: [] as SaleItem[]
     };
 
