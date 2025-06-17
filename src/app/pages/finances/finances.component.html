@@ -1,1 +1,41 @@
-<p>finances works!</p>
+<div class="page-container">
+  <div class="header">
+    <h1>Finanças</h1>
+  </div>
+
+  <div class="charts-grid">
+    <div class="chart-card">
+      <h2>Lucro Mensal (Baseado em Vendas)</h2>
+      <div class="chart-container">
+        <canvas baseChart
+                [data]="profitChartData"
+                [options]="barChartOptions"
+                [type]="barChartType">
+        </canvas>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <h2>Gasto Fixo Mensal (Baseado em Salários)</h2>
+      <div class="chart-container">
+        <canvas baseChart
+                [data]="expenseChartData"
+                [options]="barChartOptions"
+                [type]="barChartType">
+        </canvas>
+      </div>
+    </div>
+
+    <div class="chart-card">
+      <h2>Vendas por Método de Pagamento</h2>
+      <div class="chart-container">
+        <canvas baseChart
+                [data]="paymentMethodChartData"
+                [options]="doughnutChartOptions"
+                [type]="doughnutChartType">
+        </canvas>
+      </div>
+    </div>
+
+  </div>
+</div>
