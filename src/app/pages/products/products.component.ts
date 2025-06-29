@@ -9,7 +9,6 @@ import {AuthService} from '../../auth.service';
 import { CommonModule } from '@angular/common';
 import { EditProductComponent } from '../../items/popups/edit-product/edit-product.component';
 
-
 @Component({
   selector: 'app-products',
   standalone: true,
@@ -32,7 +31,7 @@ export class ProductsComponent implements OnInit {
   ) {}
 
   products: any[] = [];
-  urlAPIProducts: string = 'http://localhost:8080/api/inventory/products/';
+  urlAPIProducts: string = 'http://localhost/api/inventory/products';
 
   @ViewChild('productModal') productModal!: AddProductComponent;
   @ViewChild('editProductModal') editProductModal!: EditProductComponent;
@@ -101,7 +100,7 @@ export class ProductsComponent implements OnInit {
 
   handleDeleteProduct(productId: string): void {
     if (confirm('Tem certeza de que deseja excluir este produto?')) {
-      this.http.delete(`${this.urlAPIProducts}${productId}`, { withCredentials: true }).subscribe({
+      this.http.delete(`${this.urlAPIProducts}/${productId}`, { withCredentials: true }).subscribe({
         next: () => {
           this.snackBar.open('Produto excluído com sucesso!', 'Fechar', {
             duration: 3000,
@@ -126,13 +125,15 @@ export class ProductsComponent implements OnInit {
     const { product, file } = event;
     const formData = new FormData();
 
-    formData.append('product', new Blob([JSON.stringify(product)], { type: 'application/json' }));
+    const {id, ...productWithoutId} = product;
+    console.log(productWithoutId)
+    formData.append('product', new Blob([JSON.stringify(productWithoutId)], { type: 'application/json' }));
 
     if (file) {
       formData.append('image', file);
     }
 
-    this.http.put(`${this.urlAPIProducts}${product.id}`, formData).subscribe({
+    this.http.put(`${this.urlAPIProducts}/${product.id}`, formData).subscribe({
       next: () => {
         this.snackBar.open('Produto atualizado com sucesso!', 'Fechar', {
           duration: 3000,

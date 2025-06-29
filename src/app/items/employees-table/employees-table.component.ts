@@ -29,7 +29,7 @@ export class EmployeesTableComponent {
     'phone',       // Telefone
     'address',     // Endereço (Novo)
     'salary',      // Salário (Novo)
-    'hiredate',    // Data de Contratação (Antigo admissionDate)
+    'hireDate',    // Data de Contratação (Antigo admissionDate)
     'status',      // Status (Novo)
     'actions'      // Ações (Editar, Excluir, etc.)
   ];

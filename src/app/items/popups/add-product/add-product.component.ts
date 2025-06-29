@@ -23,7 +23,6 @@ export class AddProductComponent {
     price: 0,
     profit: 0,
     quantity: 0,
-    photo: null
   };
 
   selectedFile: File | null = null;
@@ -54,7 +53,6 @@ export class AddProductComponent {
       price: 0,
       profit: 0,
       quantity: 0,
-      photo: null
     };
     this.selectedFile = null;
   }

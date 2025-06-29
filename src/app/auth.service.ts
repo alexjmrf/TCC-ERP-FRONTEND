@@ -1,49 +1,75 @@
-import { Injectable } from '@angular/core';
-import {Router} from '@angular/router';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  private isBrowser: boolean;
 
   constructor(
     private router: Router,
-    private snackBar: MatSnackBar
-  ) {}
+    private snackBar: MatSnackBar,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+  }
 
   isAuthenticated(): boolean {
-    const token = localStorage.getItem('jwt');
-    return !!token; // Retorna true se o token existir
+    if (this.isBrowser) {
+      return !!localStorage.getItem('token');
+    }
+    return false;
   }
 
   getToken(): string | null {
-    return localStorage.getItem('jwt');
+    if (this.isBrowser) {
+      return localStorage.getItem('token');
+    }
+    return null;
   }
 
   setToken(token: string): void {
-    localStorage.setItem('jwt', token);
+    if (this.isBrowser) {
+      localStorage.setItem('token', token);
+    }
   }
 
   getOwnerId(): string | null {
-    return localStorage.getItem('userId');
+    if (this.isBrowser) {
+      return localStorage.getItem('ownerId');
+    }
+    return null;
   }
 
   setOwnerId(id: string): void {
-    localStorage.setItem('userId', id);
+    if (this.isBrowser) {
+      localStorage.setItem('ownerId', id);
+    }
   }
 
-  logout() {
-    localStorage.removeItem('jwt');
-    localStorage.removeItem('userId');
+  login(token: string, ownerId: string): void {
+    if (this.isBrowser) {
+      localStorage.setItem('token', token);
+      localStorage.setItem('ownerId', ownerId);
+    }
+  }
 
-    this.router.navigate(['/login']);
+  logout(): void {
+    if (this.isBrowser) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('ownerId');
 
-    this.snackBar.open('Você foi deslogado com sucesso.', 'Fechar', {
-      duration: 3000,
-      horizontalPosition: 'right',
-      verticalPosition: 'top',
-      panelClass: ['success-snackbar']
-    });
+      this.router.navigate(['/login']);
+
+      this.snackBar.open('Você foi deslogado com sucesso.', 'Fechar', {
+        duration: 3000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        panelClass: ['success-snackbar']
+      });
+    }
   }
 }

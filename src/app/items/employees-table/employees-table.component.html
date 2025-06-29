@@ -16,7 +16,7 @@
       <td>{{ employee.phone || '-' }}</td>
       <td>{{ employee.address || '-' | slice:0:30 }}...</td>
       <td>{{ employee.salary | currency:'BRL':'symbol':'1.2-2' }}</td>
-      <td>{{ employee.hiredate | date:'dd/MM/yyyy' }}</td>
+      <td>{{ employee.hireDate | date:'dd/MM/yyyy' }}</td>
       <td>{{ employee.status || '-' }}</td>
       <td class="action-buttons">
         <button (click)="editEmployee(employee)" title="Editar Funcionário" class="action-btn edit-btn">

@@ -31,25 +31,47 @@ export class SalesComponent {
   clients: any[] = [];
   employees: any[] = [];
   products: any[] = [];
-  urlAPISales: string = 'http://localhost:8080/api/sales/';
+  urlAPISales: string = 'http://localhost/api/sales';
+  urlAPICustomers: string = 'http://localhost/api/customers/';
+  urlAPIProducts: string = 'http://localhost/api/inventory/products/';
+  urlAPIEmployees: string = 'http://localhost/api/employees/';
 
   @ViewChild('salesModal') saleModal!: AddSaleComponent;
 
   ngOnInit(): void {
-    this.loadSales();
+    this.loadInitialData();
   }
 
-  loadSales(): void {
-    this.http.get<any>(`${this.urlAPISales}` + "overview", { withCredentials: true }).subscribe({
-      next: (data: any) => {
-        this.clients = data.customers;
-        this.employees = data.employees;
-        this.sales = data.sales;
-        this.products = data.products;
-      },
-      error: (err) => {
+  loadInitialData(): void {
+    const salesPromise = this.http.get<any[]>(this.urlAPISales, { withCredentials: true }).toPromise();
+    const clientsPromise = this.http.get<any[]>(this.urlAPICustomers, { withCredentials: true }).toPromise();
+    const employeesPromise = this.http.get<any[]>(this.urlAPIEmployees, { withCredentials: true }).toPromise();
+    const productsPromise = this.http.get<any[]>(this.urlAPIProducts, { withCredentials: true }).toPromise();
+
+    Promise.all([salesPromise, clientsPromise, employeesPromise, productsPromise])
+      .then(([salesData, clientsData, employeesData, productsData]) => {
+        this.sales = salesData || [];
+        this.clients = clientsData || [];
+        this.employees = employeesData || [];
+        this.products = productsData || [];
+      })
+      .catch(err => {
         console.error('Erro ao carregar dados:', err);
         this.snackBar.open('Erro ao carregar dados de vendas, clientes e funcionários', 'Fechar', {
+          duration: 2000,
+          panelClass: ['error-snackbar']
+        });
+      });
+  }
+
+  reloadSales(): void {
+    this.http.get<any[]>(`${this.urlAPISales}`, { withCredentials: true }).subscribe({
+      next: (data: any) => {
+        this.sales = data;
+      },
+      error: (err) => {
+        console.error('Erro ao carregar vendas:', err);
+        this.snackBar.open('Erro ao recarregar vendas.', 'Fechar', {
           duration: 2000,
           panelClass: ['error-snackbar']
         });
@@ -71,7 +93,7 @@ export class SalesComponent {
             verticalPosition: 'top',
             panelClass: ['success-snackbar']
           });
-          this.loadSales();
+          this.reloadSales();
         },
         error: (error) => {
           console.error('Erro ao excluir venda:', error);

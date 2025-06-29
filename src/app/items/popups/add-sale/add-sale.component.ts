@@ -70,7 +70,8 @@ export class AddSaleComponent implements OnInit {
     client: '',
     value: 0,
     paymentMethod: '',
-    products: [] as SaleItem[]
+    products: [] as SaleItem[],
+    status: 'PENDING' // Adicionando status da venda
   };
 
   outputSale = {
@@ -78,12 +79,13 @@ export class AddSaleComponent implements OnInit {
     employeeId: '',
     date: '',
     paymentMethod: '',
-    items: [] as SaleItem[]
+    items: [] as SaleItem[],
+    status: 'PENDING' // Adicionando status da venda
   };
 
   paymentMethods: string[] = ["CRÉDITO", "DÉBITO", "PIX"];
 
-  urlAPISales: string = 'http://localhost:8080/api/sales/';
+  urlAPISales: string = 'http://localhost/api/sales/';
 
   selectedProductId: string | null = null;
   selectedProductQuantity: number = 1;
@@ -94,6 +96,7 @@ export class AddSaleComponent implements OnInit {
   }
 
   open(clients: Client[], employees: Employee[], products: Product[]): void {
+    console.log('Dados recebidos no popup de venda:', { clients, employees, products });
     this.isVisible = true;
     this.clients = clients;
     this.employees = employees;
@@ -217,7 +220,8 @@ export class AddSaleComponent implements OnInit {
       client: '',
       value: 0,
       paymentMethod: '',
-      products: [] as SaleItem[]
+      products: [] as SaleItem[],
+      status: 'PENDING' // Adicionando status da venda
     };
 
     this.outputSale = {
@@ -225,7 +229,8 @@ export class AddSaleComponent implements OnInit {
       employeeId: '',
       date: '',
       paymentMethod: '',
-      items: [] as SaleItem[]
+      items: [] as SaleItem[],
+      status: 'PENDING' // Adicionando status da venda
     };
 
     this.selectedProductId = null;
