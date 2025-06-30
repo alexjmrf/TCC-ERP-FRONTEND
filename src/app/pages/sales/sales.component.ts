@@ -3,7 +3,6 @@ import {SearchBarComponent} from "../../items/search-bar/search-bar.component";
 import {IconBtnComponent} from '../../items/icon-btn/icon-btn.component';
 import { HttpClient } from '@angular/common/http';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {AuthService} from '../../auth.service';
 import {AddSaleComponent} from '../../items/popups/add-sale/add-sale.component';
 import {SalesTableComponent} from '../../items/sales-table/sales-table.component';
 
@@ -14,7 +13,6 @@ import {SalesTableComponent} from '../../items/sales-table/sales-table.component
     SearchBarComponent,
     AddSaleComponent,
     SalesTableComponent,
-    AddSaleComponent,
   ],
   templateUrl: './sales.component.html',
   styleUrl: './sales.component.scss'
@@ -23,7 +21,6 @@ import {SalesTableComponent} from '../../items/sales-table/sales-table.component
 export class SalesComponent {
   constructor(
     private http: HttpClient,
-    private authService: AuthService,
     private snackBar: MatSnackBar
   ) {}
 
@@ -31,10 +28,10 @@ export class SalesComponent {
   clients: any[] = [];
   employees: any[] = [];
   products: any[] = [];
-  urlAPISales: string = 'http://localhost/api/sales';
-  urlAPICustomers: string = 'http://localhost/api/customers/';
-  urlAPIProducts: string = 'http://localhost/api/inventory/products/';
-  urlAPIEmployees: string = 'http://localhost/api/employees/';
+  urlAPISales: string = 'http://4.228.35.69/api/sales';
+  urlAPICustomers: string = 'http://4.228.35.69/api/customers/';
+  urlAPIProducts: string = 'http://4.228.35.69/api/inventory/products/';
+  urlAPIEmployees: string = 'http://4.228.35.69/api/employees/';
 
   @ViewChild('salesModal') saleModal!: AddSaleComponent;
 

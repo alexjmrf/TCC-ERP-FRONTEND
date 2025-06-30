@@ -6,6 +6,7 @@ import {CommonModule, NgOptimizedImage} from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatButtonModule } from '@angular/material/button';
 import {AuthService} from '../../auth.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -22,8 +23,8 @@ import {AuthService} from '../../auth.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  private readonly API_URL = 'http://localhost/api/auth/login';
-  protected readonly GOOGLE_SSO = "http://localhost:8080/oauth2/authorization/google"
+  private readonly API_URL = "http://4.228.35.69/api/auth/login";
+  //protected readonly GOOGLE_SSO = "http://localhost:8080/oauth2/authorization/google"
 
   constructor(
     private router: Router,
@@ -52,7 +53,7 @@ export class LoginComponent {
               panelClass: ['success-snackbar']
             });
 
-            this.router.navigate(['/products']);
+            this.router.navigate(['/finances']);
           },
           error: (error) => {
             console.log(error);

@@ -31,7 +31,7 @@ export class ProductsComponent implements OnInit {
   ) {}
 
   products: any[] = [];
-  urlAPIProducts: string = 'http://localhost/api/inventory/products';
+  urlAPIProducts: string = 'http://4.228.35.69/api/inventory/products';
 
   @ViewChild('productModal') productModal!: AddProductComponent;
   @ViewChild('editProductModal') editProductModal!: EditProductComponent;

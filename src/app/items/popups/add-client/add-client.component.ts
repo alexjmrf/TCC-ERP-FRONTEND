@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormsModule, NgForm } from '@angular/forms'; //
-import { NgIf, CommonModule } from '@angular/common'; //
+import { FormsModule, NgForm } from '@angular/forms';
+import { NgIf, CommonModule } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -23,8 +23,6 @@ export class AddClientComponent {
     email: '',
     phone: '',
     address: '',
-    // Adicione outros campos relevantes para o cliente
-    // photo: null // Se houver upload de foto para o cliente
   };
 
   selectedFile: File | null = null;
@@ -40,14 +38,7 @@ export class AddClientComponent {
     this.resetForm();
   }
 
-  // onFileChange(event: any): void {
-  //   const file = event.target.files[0];
-  //   if (file) {
-  //     this.selectedFile = file;
-  //   }
-  // }
-
-  onSubmit(form: NgForm): void { //
+  onSubmit(form: NgForm): void {
     if (form.invalid) {
       this.snackBar.open('Por favor, preencha todos os campos obrigatórios.', 'Fechar', {
         duration: 3000,
@@ -68,7 +59,5 @@ export class AddClientComponent {
       // photo: null
     };
     this.selectedFile = null;
-    // Se estiver usando NgForm, pode ser necessário resetá-lo também,
-    // mas como o popup é fechado e reaberto, o estado do formulário é geralmente reiniciado.
   }
 }

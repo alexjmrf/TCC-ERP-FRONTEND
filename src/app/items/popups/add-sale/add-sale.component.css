@@ -85,4 +85,18 @@ button[type=button].btn-popup:hover:not(:disabled) {
   background-color: #c82333;
 }
 
+.readonly-no-cursor {
+  caret-color: transparent !important;
+  cursor: not-allowed !important;
+}
+.readonly-no-cursor:focus {
+  outline: none !important;
+}
+
+.readonly-no-cursor:focus {
+  user-select: none !important;
+  border: 1px solid #ccc !important;
+  box-shadow: none !important;
+}
+
 /*# sourceMappingURL=add-sale.component.css.map */

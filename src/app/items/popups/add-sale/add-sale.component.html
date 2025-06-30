@@ -36,6 +36,10 @@
         </mat-form-field>
       </div>
 
+      <!-- <div class="form-field" style="margin-bottom: 20px;">
+        <label for="employee-saledate">Data da Venda:</label> <input id="employee-saledate" type="date" [(ngModel)]="sale.date" name="saledate" required />
+      </div> -->
+
       <div class="product-add-section" style="display: flex; gap: 8px; align-items: baseline;">
         <mat-form-field appearance="fill">
           <mat-label>Produto</mat-label>
@@ -71,7 +75,7 @@
       <div class="form-field">
         <mat-form-field appearance="fill">
           <mat-label>Valor Total</mat-label>
-          <input matInput type="text" [value]="sale.value | currency:'BRL':'symbol':'1.2-2'" readonly>
+          <input matInput class="readonly-no-cursor" type="text" [value]="sale.value | currency:'BRL'" readonly>
         </mat-form-field>
       </div>
 
