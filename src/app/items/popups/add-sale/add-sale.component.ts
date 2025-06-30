@@ -1,5 +1,5 @@
-import {Component, OnInit, Input} from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { NgIf, NgFor, CommonModule } from '@angular/common';
 
 
@@ -8,35 +8,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
-interface Product {
-  id: string;
-  name: string;
-  price: number;
-  quantity: number;
-}
-
-interface SaleItem {
-  productId: string;
-  quantity: number;
-  productName?: string;
-  price: number;
-}
-
-interface Employee {
-  id: string;
-  name: string;
-}
-
-interface Client {
-  id: string;
-  name: string;
-  email: string;
-  address: string;
-  phone: string;
-}
+interface Product { id: string; name: string; price: number; quantity: number; }
+interface SaleItem { productId: string; quantity: number; productName?: string; price: number; }
+interface Employee { id: string; name: string; }
+interface Client { id: string; name: string; email: string; address: string; phone: string; }
 
 @Component({
   selector: 'app-add-sale',
@@ -46,14 +26,14 @@ interface Client {
     NgIf,
     NgFor,
     CommonModule,
-    ReactiveFormsModule,
     MatSelectModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-    HttpClientModule
+    MatDatepickerModule,
   ],
+  providers: [provideNativeDateAdapter()],
   templateUrl: './add-sale.component.html',
   styleUrl: './add-sale.component.scss'
 })
@@ -63,6 +43,7 @@ export class AddSaleComponent implements OnInit {
   @Input() clients: Client[] = [];
   @Input() employees: Employee[] = [];
   @Input() availableProducts: Product[] = [];
+  @Output() saleAdded = new EventEmitter<void>();
 
   sale = {
     id: '',
@@ -83,7 +64,7 @@ export class AddSaleComponent implements OnInit {
     status: 'PENDING' // Adicionando status da venda
   };
 
-  paymentMethods: string[] = ["CRÉDITO", "DÉBITO", "PIX"];
+  paymentMethods: string[] = ["CRÉDITO", "DÉBITO", "PIX", "DINHEIRO"];
 
   urlAPISales: string = 'http://localhost/api/sales/';
 
@@ -188,7 +169,7 @@ export class AddSaleComponent implements OnInit {
     this.outputSale.clientId = this.sale.client;
     this.outputSale.paymentMethod = this.sale.paymentMethod;
     // @ts-ignore
-    this.outputSale.date = new Date().toISOString();
+    this.outputSale.date = new Date(this.sale.date).toISOString();
     this.outputSale.items = this.sale.products;
 
     this.http.post(this.urlAPISales, this.outputSale, { withCredentials: true }).subscribe({
@@ -200,6 +181,7 @@ export class AddSaleComponent implements OnInit {
           verticalPosition: 'top',
           panelClass: ['success-snackbar']
         });
+        this.saleAdded.emit();
         this.close();
       },
       error: (error) => {
@@ -222,6 +204,7 @@ export class AddSaleComponent implements OnInit {
       paymentMethod: '',
       products: [] as SaleItem[],
       status: 'PENDING' // Adicionando status da venda
+      products: [] as SaleItem[]
     };
 
     this.outputSale = {

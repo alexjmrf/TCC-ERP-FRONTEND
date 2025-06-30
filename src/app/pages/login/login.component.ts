@@ -52,7 +52,7 @@ export class LoginComponent {
               panelClass: ['success-snackbar']
             });
 
-            this.router.navigate(['/products']);
+            this.router.navigate(['/finances']);
           },
           error: (error) => {
             console.log(error);

@@ -9,31 +9,25 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class AuthService {
   private isBrowser: boolean;
 
-  constructor(
-    private router: Router,
-    private snackBar: MatSnackBar,
-    @Inject(PLATFORM_ID) private platformId: Object
-  ) {
+  constructor(private router: Router, @Inject(PLATFORM_ID) private platformId: object, private snackBar: MatSnackBar) {
     this.isBrowser = isPlatformBrowser(this.platformId);
-  }
-
-  isAuthenticated(): boolean {
-    if (this.isBrowser) {
-      return !!localStorage.getItem('token');
-    }
-    return false;
-  }
-
-  getToken(): string | null {
-    if (this.isBrowser) {
-      return localStorage.getItem('token');
-    }
-    return null;
   }
 
   setToken(token: string): void {
     if (this.isBrowser) {
-      localStorage.setItem('token', token);
+      localStorage.setItem('jwt', token);
+    }
+  }
+
+  getToken(): string | null {
+    if (this.isBrowser) {
+      return localStorage.getItem('jwt');
+    }
+    return null;
+  }
+  setOwnerId(id: string): void {
+    if (this.isBrowser) {
+      localStorage.setItem('ownerId', id);
     }
   }
 
@@ -43,24 +37,20 @@ export class AuthService {
     }
     return null;
   }
-
-  setOwnerId(id: string): void {
+  
+  isAuthenticated(): boolean {
     if (this.isBrowser) {
-      localStorage.setItem('ownerId', id);
+      const token = this.getToken();
+      return !!token;
     }
+    return false;
   }
 
-  login(token: string, ownerId: string): void {
+  logout() {
     if (this.isBrowser) {
-      localStorage.setItem('token', token);
-      localStorage.setItem('ownerId', ownerId);
-    }
-  }
-
-  logout(): void {
-    if (this.isBrowser) {
-      localStorage.removeItem('token');
+      localStorage.removeItem('jwt');
       localStorage.removeItem('ownerId');
+    }
 
       this.router.navigate(['/login']);
 
