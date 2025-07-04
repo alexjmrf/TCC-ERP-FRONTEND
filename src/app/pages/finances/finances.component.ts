@@ -77,7 +77,7 @@ export class FinancesComponent implements OnInit {
     this.loadFinancialData();
   }
 
-  urlAPISales: string = 'http://4.228.35.69/api/sales/';
+  urlAPISales: string = 'https://4.228.35.69/api/sales/';
 
   loadFinancialData(): void {
     this.http.get<any>(`${this.urlAPISales}` + "overview", { withCredentials: true }).subscribe({

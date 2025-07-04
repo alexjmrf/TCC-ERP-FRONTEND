@@ -66,7 +66,7 @@ export class AddSaleComponent implements OnInit {
 
   paymentMethods: string[] = ["CRÉDITO", "DÉBITO", "PIX", "DINHEIRO"];
 
-  urlAPISales: string = 'http://4.228.35.69/api/sales/';
+  urlAPISales: string = 'https://4.228.35.69/api/sales/';
 
   selectedProductId: string | null = null;
   selectedProductQuantity: number = 1;
