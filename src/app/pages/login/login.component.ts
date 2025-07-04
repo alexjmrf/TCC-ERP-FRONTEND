@@ -23,7 +23,7 @@ import { environment } from '../../../environments/environment';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  private readonly API_URL = "http://4.228.35.69/api/auth/login";
+  private readonly API_URL = "http://74.163.204.254/api/auth/login";
   //protected readonly GOOGLE_SSO = "http://localhost:8080/oauth2/authorization/google"
 
   constructor(

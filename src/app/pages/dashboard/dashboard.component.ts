@@ -19,10 +19,10 @@ Chart.register(...registerables);
 })
 export class DashboardComponent implements OnInit {
   // URLs para APIs
-  urlAPISales: string = 'http://4.228.35.69/api/sales/';
-  urlAPICustomers: string = 'http://4.228.35.69/api/customers/';
-  urlAPIProducts: string = 'http://4.228.35.69/api/inventory/products/';
-  urlAPIEmployees: string = 'http://4.228.35.69/api/employees/';
+  urlAPISales: string = 'http://74.163.204.254/api/sales/';
+  urlAPICustomers: string = 'http://74.163.204.254/api/customers/';
+  urlAPIProducts: string = 'http://74.163.204.254/api/inventory/products/';
+  urlAPIEmployees: string = 'http://74.163.204.254/api/employees/';
 
   // Dados para o dashboard
   sales: any[] = [];

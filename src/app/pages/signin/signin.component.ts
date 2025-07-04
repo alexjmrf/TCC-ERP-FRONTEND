@@ -23,7 +23,7 @@ export class SigninComponent {
   confirmPassword: string = '';
 
 
-  private readonly API_REGISTER_URL = 'http://4.228.35.69/api/auth/register'; //
+  private readonly API_REGISTER_URL = 'http://74.163.204.254/api/auth/register'; //
 
   constructor(
     private router: Router,

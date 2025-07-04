@@ -28,10 +28,10 @@ export class SalesComponent {
   clients: any[] = [];
   employees: any[] = [];
   products: any[] = [];
-  urlAPISales: string = 'http://4.228.35.69/api/sales';
-  urlAPICustomers: string = 'http://4.228.35.69/api/customers/';
-  urlAPIProducts: string = 'http://4.228.35.69/api/inventory/products/';
-  urlAPIEmployees: string = 'http://4.228.35.69/api/employees/';
+  urlAPISales: string = 'http://74.163.204.254/api/sales';
+  urlAPICustomers: string = 'http://74.163.204.254/api/customers/';
+  urlAPIProducts: string = 'http://74.163.204.254/api/inventory/products/';
+  urlAPIEmployees: string = 'http://74.163.204.254/api/employees/';
 
   @ViewChild('salesModal') saleModal!: AddSaleComponent;
 
