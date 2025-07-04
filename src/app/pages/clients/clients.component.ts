@@ -31,7 +31,7 @@ export class ClientsComponent implements OnInit {
   ) {}
 
   clients: any[] = [];
-  private readonly urlAPICustomers = 'http://74.163.204.254/api/customers/';
+  private readonly urlAPICustomers = 'https://tcc-ale-api.brazilsouth.cloudapp.azure.com/api/customers/';
 
   @ViewChild('clientModal') clientModal!: AddClientComponent;
   @ViewChild('editClientModal') editClientModal!: EditClientComponent;

@@ -66,7 +66,7 @@ export class AddSaleComponent implements OnInit {
 
   paymentMethods: string[] = ["CRÉDITO", "DÉBITO", "PIX", "DINHEIRO"];
 
-  urlAPISales: string = 'https://74.163.204.254/api/sales/';
+  urlAPISales: string = 'https://tcc-ale-api.brazilsouth.cloudapp.azure.com/api/sales/';
 
   selectedProductId: string | null = null;
   selectedProductQuantity: number = 1;

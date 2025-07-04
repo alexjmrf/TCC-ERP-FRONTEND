@@ -77,7 +77,7 @@ export class FinancesComponent implements OnInit {
     this.loadFinancialData();
   }
 
-  urlAPISales: string = 'http://74.163.204.254/api/sales/';
+  urlAPISales: string = 'https://tcc-ale-api.brazilsouth.cloudapp.azure.com/api/sales/';
 
   loadFinancialData(): void {
     this.http.get<any>(`${this.urlAPISales}` + "overview", { withCredentials: true }).subscribe({

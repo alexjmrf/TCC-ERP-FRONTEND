@@ -31,7 +31,7 @@ export class EmployeesComponent implements OnInit {
   ) {}
 
   employees: any[] = [];
-  private readonly urlAPIEmployees = 'http://74.163.204.254/api/employees/';
+  private readonly urlAPIEmployees = 'https://tcc-ale-api.brazilsouth.cloudapp.azure.com/api/employees/';
 
   @ViewChild('employeeModal') employeeModal!: AddEmployeeComponent;
   @ViewChild('editEmployeeModal') editEmployeeModal!: EditEmployeeComponent;

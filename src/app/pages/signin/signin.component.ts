@@ -23,7 +23,7 @@ export class SigninComponent {
   confirmPassword: string = '';
 
 
-  private readonly API_REGISTER_URL = 'http://74.163.204.254/api/auth/register'; //
+  private readonly API_REGISTER_URL = 'https://tcc-ale-api.brazilsouth.cloudapp.azure.com/api/auth/register'; //
 
   constructor(
     private router: Router,
